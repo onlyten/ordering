@@ -1,0 +1,131 @@
+<section class="content-header">
+    <h1>
+        商城管理
+        <small></small>
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+     <div class="row">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">评论搜索</h3>
+                </div>
+                <!-- form start -->
+                <form class="form-horizontal" action="{:U('Home/Shop/commentSearch')}" method="post">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label" style="padding-right:0px;">用户名</label>
+
+                            <div class="col-sm-3">
+                                <input class="form-control" name="username" placeholder="" value="{$commentPost.username}"
+                                       type="text">
+                            </div>
+                           
+                            <label class="col-sm-1 control-label" style="padding-right:0px;">时间范围</label>
+
+                            <div class="col-sm-7">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-right" name="timeRange"
+                                           id="reservationtime" value="{$commentPost.timeRange}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+
+                    <div class="box-footer">
+                        <div class="col-sm-2">
+                            <button type="submit" class="btn btn-block btn-danger">开始搜索</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- /.box -->
+        </div>
+        <!--/.col (right) -->
+    </div>
+    <div class="row">
+        <!-- /.col -->
+        <div class="col-md-12">
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title">评论管理</h3>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body no-padding">
+                    <div class="table-responsive" style="overflow-x: visible;">
+                        <table class="table table-bordered table-hover">
+                            <tbody>
+                            <tr>
+                                <th class="hidden-xs">
+                                    <label><input onchange="checkAll()" type="checkbox" value=""></label>
+                                </th>
+                                <th>店铺名称</th>
+                                <th>商品名称</th>
+                                <th>用户名</th>
+                                <th>评论内容</th>
+								<th>回复内容</th>
+                                <th>时间</th>
+								<th>操作</th>
+                            </tr>
+
+                            <volist name="comment" id="comment">
+                                <tr>
+                                    <td class="hidden-xs">
+                                        <label><input name="checkbox" class="check" type="checkbox"
+                                                      value="{$comment.id}"></label>
+                                    </td>
+                                    <td>{$comment.shop.name}</td>
+                                    <td>{$comment.orderDetail.name}</td>
+                                    <td>{$comment.student.xsxm}</td>
+                                    <td>{$comment.name}</td>
+									<td>{$comment.remark|msubstr=0,12}</td>
+                                    <td>{$comment.time}</td>
+									 <td class="table-action"><a
+                                        href="{:U('Home/Shop/modifyComment',array('id'=>$comment['id']))}">回复</a>                                           
+                                    </td>
+                                </tr>
+                            </volist>
+                            </tbody>
+                        </table>
+                        <div class="box-footer no-padding">
+                            <div class="mailbox-controls">
+                                <div class="btn-group" style="height: 45px">
+
+                                </div>
+                                <!-- /.btn-group -->
+                                <div class="pull-right">
+                                    {$page}
+                                    <!-- /.btn-group -->
+                                </div>
+                                <!-- /.pull-right -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.mail-box-messages -->
+                </div>
+            </div>
+            <!-- /. box -->
+        </div>
+        <!-- /.col -->
+    </div>
+</section>
+<script type="text/javascript">
+    $(function () {
+        $('#reservationtime').daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 30,
+            format: 'YYYY-MM-DD HH:mm:ss',
+            separator: ' --- ',
+        });
+       
+    });
+</script>

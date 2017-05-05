@@ -1,0 +1,396 @@
+<section class="content-header">
+    <h1>
+        商城管理
+        <small></small>
+    </h1>
+</section>
+<style type="text/css">
+   
+    .error{
+        color:red;
+    }
+</style>
+<script>
+$().ready(function() {
+// 在键盘按下并释放及提交后验证提交表单
+  $("#changeAction").validate({
+        rules: {
+          name: {
+            required: true,
+            maxlength: 8
+          },
+          file_id: "required",
+          
+        },
+        messages: {
+          name: {
+            required: "名称不能为空",
+            maxlength: "名称最多8个字"
+          },
+          file_id: {
+            required: "图片不能为空",
+          },
+         
+        }
+    });
+});
+</script>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title">修改商品</h3>
+                </div>
+                <!-- form start -->
+                <form action="{:U('Home/Shop/changeProduct')}" method="post" class="form-horizontal" id="changeAction">
+                    <div class="box-body">
+                        <input class="form-control" name="id" placeholder="" value="{$product['id']?$product['id']:0}"
+                               type="hidden">
+                        <input   id="timeFlag"    type="hidden">
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商品菜单</label>
+
+                            <div class="col-sm-10">
+                                <select name="menu_id" class="form-control" id="menu_id" onchange="getPrice();">
+                                    <option value="{$product.menu_id}" selected='selected'>{$product.menu_name}
+                                    </option>
+                                   <!--  <volist name="menuList" id="menuList">
+
+                                        <option value="{$menuList.id}"  
+                                        <if condition="$menuList.id eq '$product.menu_id'"> selected='selected'</if>>{$menuList.name}</option>
+                                    </volist> -->
+                                </select>
+                            </div>
+                        </div>
+                       <div class="form-group">
+                         <label class="col-sm-2 control-label">配送时间</label>
+
+                             <div class="col-sm-10">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-right"  name="order_date"
+                                           id="timeRange" readOnly value="{$product.order_date}" >
+                                </div>
+                            </div>
+                          </div>   
+                            
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商品名称</label>
+
+                            <div class="col-sm-10">
+                                <!-- <input class="form-control" name="name" id="prodName" placeholder="" value="{$product.name}" required
+                                       type="text"> -->
+                                 <input class="form-control name" name="name1" id="prodName1" placeholder="" value="" 
+                                  maxlength="18"  type="text" style="float:left;width:90px;" ><div style="float:left;">＋</div>
+                                  <input class="form-control name" name="name2" id="prodName2" placeholder="" value="" 
+                                  maxlength="18"  type="text" style="float:left;width:90px;" ><div style="float:left;">＋</div>
+                                  <input class="form-control name" name="name3" id="prodName3" placeholder="" value="" 
+                                  maxlength="18"  type="text" style="float:left;width:90px;"  ><div style="float:left;">＋</div>
+                                  <input class="form-control name" name="name4" id="prodName4" placeholder="" value="" 
+                                  maxlength="18"  type="text" style="float:left;width:90px;" ><div style="float:left;">＋</div>
+                                  <input class="form-control name" name="name5" id="prodName5" placeholder="" value="" 
+                                  maxlength="18"  type="text" style="float:left;width:90px;" ><span style="float:left;">＋</span>
+                                  <input class="form-control name" name="name6" id="prodName6" placeholder="" value="" 
+                                  maxlength="18"  type="text" style="float:left;width:90px;"  >
+                                  <span style="color:red; float:left; padding-left:15px; line-height:35px;" id="proWarn"></span>
+                            </div>
+                        </div>
+
+						<!--
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商品子名称</label>
+
+                            <div class="col-sm-10">
+                                <input class="form-control" name="subname" placeholder="" value="{$product.subname}"
+                                       type="text">
+                            </div>
+                        </div>
+						-->
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商品价格</label>
+
+                            <div class="col-sm-10">
+                                <input class="form-control" name="price" id="price" placeholder="" readOnly value="{$product.price}"
+                                       type="text">
+                            </div>
+                        </div>
+
+						<!--
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商品原价格</label>
+
+                            <div class="col-sm-10">
+                                <input class="form-control" name="old_price" placeholder="" value="{$product.old_price}"
+                                       type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商品单位</label>
+
+                            <div class="col-sm-10">
+                                <input class="form-control" name="unit" placeholder="" value="{$product.unit}"
+                                       type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">赠送积分</label>
+
+                            <div class="col-sm-10">
+                                <input class="form-control" name="score" placeholder="" value="{$product.score}"
+                                       type="text">
+                            </div>
+                        </div>
+						-->
+
+                        <!--<div class="form-group">-->
+                        <!--    <label class="col-sm-2 control-label">商品库存</label>-->
+
+                        <!--    <div class="col-sm-10">-->
+                        <!--        <input class="form-control" name="store" placeholder="" value="{$product.store}"-->
+                        <!--               type="text">-->
+                        <!--    </div>-->
+                        <!--</div>-->
+
+						<!--
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商品排序</label>
+
+                            <div class="col-sm-10">
+                                <input class="form-control" name="rank" placeholder="" value="{$product.rank}"
+                                       type="text">
+                            </div>
+                        </div>
+						-->
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">图片</label>
+
+                            <div class="col-sm-10">
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-new img-thumbnail">
+                                        <empty name="product.file_id"><img
+                                                src="__PUBLIC__/Admin/dist/img/noimage.gif">
+                                            <else/>
+                                            <img src="__PUBLIC__/Uploads/{$product.savepath}{$product.savename}">
+                                        </empty>
+                                        <input class="form-control" name="file_id" id="file_id" placeholder=""
+                                               value="{$product.file_id}" required
+                                               type="hidden">
+
+                                        <div class="edit_pic_mask">
+                                            <i class="fa fa-plus-circle" onclick="imageUploader(this,false)"></i>
+                                            <i class="fa fa-minus-circle" onclick="removeImage(this,false)"></i>
+                                        </div>
+                                    </div>
+                                     <span style="color:red;display:none;" id="file_idwarn">请上传图片</span>
+                                </div>
+                            </div>
+                        </div>
+						<!--
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商品图集</label>
+
+                            <div class="col-sm-10">
+                                <div class="fileupload fileupload-new" data-provides="fileupload" id="albumsClone">
+                                    <volist name="product.albums" id="albums">
+                                        <div class="fileupload-new img-thumbnail">
+                                            <img src="__PUBLIC__/Uploads/{$albums.savepath}{$albums.savename}">
+                                            <input class="form-control" name="albums[]" placeholder=""
+                                                   value="{$albums.id}"
+                                                   type="hidden">
+
+                                            <div class="edit_pic_mask">
+                                                <i class="fa fa-plus-circle" onclick="imageUploader(this,true)"></i>
+                                                <i class="fa fa-minus-circle" onclick="removeImage(this,true)"></i>
+                                            </div>
+                                        </div>
+                                    </volist>
+
+                                    <div class="fileupload-new img-thumbnail">
+                                        <img src="__PUBLIC__/Admin/dist/img/noimage.gif">
+                                        <input class="form-control" name="albums[]" placeholder="" value=""
+                                               type="hidden">
+
+                                        <div class="edit_pic_mask">
+                                            <i class="fa fa-plus-circle" onclick="imageUploader(this,true)"></i>
+                                            <i class="fa fa-minus-circle" onclick="removeImage(this,true)"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">启用Sku</label>
+
+                            <div class="col-md-7">
+                                <label class="radio-inline"><input name="psku" type="radio"
+                                    <if condition="$product.psku eq 1">checked="checked"</if>
+                                    value="1"><span>开启</span></label>
+                                <label class="radio-inline"><input name="psku" type="radio"
+                                    <if condition="$product.psku eq 0">checked="checked"</if>
+                                    value="0"><span>关闭</span></label>
+                            </div>
+                        </div>
+						-->
+<!--
+                        <div class="form-group">
+                            <label class="control-label col-md-2">商品标签</label>
+
+                            <div class="col-md-7">
+                                <volist name="labelList" id="label">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="label[]" value="{$label.name}"
+                                            <volist name="product.label" id="vo">
+                                                <if condition="$vo eq $label['name']">checked="checked"</if>
+                                            </volist>
+                                            >{$label.name}
+                                        </label>
+                                    </div>
+                                </volist>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2">商品状态</label>
+
+                            <div class="col-md-7">
+                                <label class="radio-inline"><input name="status" type="radio"
+                                    <if condition="$product.status eq 1">checked="checked"</if>
+                                    value="1"><span>出售</span></label>
+                                <label class="radio-inline"><input name="status" type="radio"
+                                    <if condition="$product.status eq -1">checked="checked"</if>
+                                    value="-1"><span>下架</span></label>
+                                <label class="radio-inline"><input name="status" type="radio"
+                                    <if condition="$product.status eq 0">checked="checked"</if>
+                                    value="0"><span>售罄</span></label>
+                            </div>
+                        </div>
+-->
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">备注</label>
+
+                            <div class="col-md-10">
+                                <input class="form-control" name="remark" placeholder="" value="{$product.remark}"
+                                       type="text">
+                            </div>
+                        </div>
+                       
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商品详情</label>
+
+                            <div class="col-sm-10">
+                                <!-- 加载编辑器的容器 -->
+                                <script id="UEditor" name="detail" type="text/plain" style="height:500px;">
+                                    {$product.detail}
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+
+                    <div class="box-footer">
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-block btn-danger" id="saveInfo">保存</button>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-block btn-default" onclick="history.go(-1)">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- /.box -->
+
+        </div>
+        <!--/.col (right) -->
+    </div>
+</section>
+<script type="text/javascript">
+    $(function () {
+        //实例化编辑器异步载入
+        var editor = new UE.ui.Editor();
+        editor.render("UEditor");        
+        var nameStr = '{$product.name}';
+        var namet = nameStr.split("+");
+        var length = namet.length;
+        for(var i=0;i<length;i++)
+        {
+             $("#prodName"+(i+1)).val(namet[i]);
+        }
+
+        if ('{$product}') {
+            $('select[name="menu_id"]').val('{$product.menu_id}');
+        }
+        getPrice();
+		$("#saveInfo").click(function(){
+            var prodName="";
+             for(var i=1;i<=6;i++)
+             {
+               //alert( name[i].value);
+               prodName=prodName+$("#prodName"+i).val();
+             }
+            if(prodName==null || prodName =='')
+            {
+                $("#proWarn").text("商品名称不能为空");
+                $("#proWarn").show();
+            }else
+            {
+                $("#proWarn").hide();
+            }
+		
+		     var file_id=$('#file_id').val();
+			
+			 if(file_id==null || file_id=='' ||file_id==0)
+			 {
+			    $("#file_idwarn").show();
+			 }else
+			 {
+			    $("#changeAction").submit();
+			    
+			 }
+		    
+		});
+    });
+
+    function addAttribute() {
+        var obj = $('.cloneAttr').first().clone();
+        obj.find('input').val('');
+        $('#addAttrBtn').before(obj);
+    }
+	//根据菜单的更换查询价格
+    function getPrice() {
+  
+    	var menuvalue=$("#menu_id").val();
+		if(menuvalue!=null && menuvalue!='')
+		{
+			$.ajax({
+				type: "post",
+				url: "{:U('Home/shop/getPrice')}",
+				data: {
+					menuId: menuvalue,
+				},
+				success: function (res) {
+					$("#price").val(res.price);
+									
+				}
+			});
+		   
+		}
+        
+       // return flag;
+    }
+  
+</script>

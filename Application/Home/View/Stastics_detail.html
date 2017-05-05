@@ -1,0 +1,70 @@
+<section class="content-header">
+    <h1>
+        订餐统计详情
+        <small></small>
+    </h1>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <!-- /.col -->
+        <div class="col-md-12">
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title">订餐统计详情</h3>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body no-padding">
+                    <div class="mailbox-controls">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-danger "
+                                    onclick="preview();">打印
+                            </button>
+                        </div>
+                        <div class="btn-group">
+                            <a href="{:U('Home/Stastics/exportone',array(\'classId\'=>$classid , \'year\'=>I(\'get.year\') ,\'month\'=>I(\'get.month\') ,\'day\'=>I(\'get.day\')))}"
+                               target="_blank" class="btn btn-danger">
+                                导出全部统计
+                            </a>
+                        </div>
+                    </div>
+                    <div class="table-responsive" style="overflow-x: visible;">
+                        <!--startprint-->
+                            {$table}
+                            {$tabletwo}
+                        <!--endprint-->
+                    </div>
+                    <!-- /.mail-box-messages -->
+                </div>
+            </div>
+            <!-- /. box -->
+        </div>
+        <!-- /.col -->
+    </div>
+</section>
+<script type="text/javascript">
+    $(function () {
+        if ('{$orderPost}') {
+            $('select[name="payment"]').val('{$orderPost.payment}');
+            $('select[name="pay_status"]').val('{$orderPost.pay_status}');
+            $('select[name="status"]').val('{$orderPost.status}');
+            $('select[name="product_id"]').val('{$orderPost.product_id}');
+        }
+    });
+    //实现打印方法 
+    function preview()         
+    {    
+        var year = $("#year").val();
+        var month = $("#month").val();
+        var day = $("#day").val();
+        bdhtml=window.document.body.innerHTML;//获取当前页的html代码  
+        sprnstr="<!--startprint-->";//设置打印开始区域  
+        eprnstr="<!--endprint-->";//设置打印结束区域  
+        prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr)+17); //从开始代码向后取html  
+        prnhtmlprnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));//从结束代码向前取html  
+        window.document.body.innerHTML=prnhtml;  
+        window.print();  
+        window.document.body.innerHTML=bdhtml;            
+    }  
+</script>

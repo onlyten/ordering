@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+    <head>
+        <title>请假审批</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta content="telephone=no" name="format-detection">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    </head>
+    <body>  
+		<table>
+			<thead>
+				<tr style="background: #0099FF;color:#FFFFFF">
+					<th>日期</th>
+					<th>姓名</th>
+					<th>状态</th>
+					<th>详细</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<volist name='order_check' id='vo'>
+				<tr>
+					<td><!-- <input type="checkbox" name="delete_id[]" value="{$vo['id']}"> -->{$vo["apply_time"]}</td>
+					<td>{$vo["stu_name"]}</td>
+					<td>
+						<if condition="$vo['leave_status'] eq -1">请假</if>
+						<if condition="$vo['retreat_status'] eq -1">退餐</if>
+					</td>
+					<td>{$vo["date"]}</td>
+					<td>
+						<a href="{:U('check_update',array('detail_id'=>$vo['detail_id'],'agree'=>1,'leave_status'=>$vo['leave_status'],'retreat_status'=>$vo['retreat_status']))}">同意</a>&nbsp;&nbsp;
+						<a href="{:U('check_update',array('detail_id'=>$vo['detail_id'],'agree'=>0,'leave_status'=>$vo['leave_status'],'retreat_status'=>$vo['retreat_status']))}">拒绝</a>
+					</td>
+				</tr>
+				</volist>
+			</tbody>
+		</table>
+	</body>
+</html>

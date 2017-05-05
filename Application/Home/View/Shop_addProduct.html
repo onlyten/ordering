@@ -1,0 +1,382 @@
+<section class="content-header">
+    <h1>
+        商城管理
+        <small></small>
+    </h1>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title">新增商品</h3>
+                </div>
+                <!-- form start -->
+                <form action="{:U('Home/Shop/addProduct')}" method="post" class="form-horizontal" id="addAction">
+                    <div class="box-body">
+                        <input class="form-control" name="id" placeholder="" value="{$product['id']?$product['id']:0}"
+                               type="hidden">
+                        <input   id="timeFlag"    type="hidden">
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商品菜单</label>
+
+                            <div class="col-sm-10">
+                                <select id="menu_id" name="menu_id" class="form-control" onchange="getPrice();">
+                                    <volist name="menuList" id="menuList">
+                                        <option value="{$menuList.id}">{$menuList.name}</option>
+                                    </volist>
+                                </select>
+                                 <span style=" float:left; padding-left:15px; line-height:35px;" id="menuwarn"></span>
+                            </div>
+                        </div>
+                       <div class="form-group">
+                         <label class="col-sm-2 control-label">配送时间</label>
+
+                             <div class="col-sm-10">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                    <input type="text" class="form-control" name="order_date"
+                                           id="reservationtime" value="{$product.order_date}" onchange="checkOrderDate();">
+								    <span style="color:red; float:left; padding-left:15px; line-height:35px;" id="timeWarn"></span>
+                                </div>
+                            </div>
+                             <input type="hidden" id="startDate" name="startDate" >
+                             <input type="hidden" id="endDate" name="endDate">
+                          </div>   
+                            
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商品名称</label>
+
+                            <div class="col-sm-10">
+                                <!--
+                                <input class="form-control" name="name" id="prodName" placeholder="" value="{$product.name}" required
+                                  maxlength="18"  type="text" style="float:left;" >
+                                 -->
+                                  <input class="form-control name" name="name1" id="prodName1" placeholder="" value="" 
+                                  maxlength="18"  type="text" style="float:left;width:90px;" ><div style="float:left;">＋</div>
+                                  <input class="form-control name" name="name2" id="prodName2" placeholder="" value="" 
+                                  maxlength="18"  type="text" style="float:left;width:90px;" ><div style="float:left;">＋</div>
+                                  <input class="form-control name" name="name3" id="prodName3" placeholder="" value="" 
+                                  maxlength="18"  type="text" style="float:left;width:90px;"  ><div style="float:left;">＋</div>
+                                  <input class="form-control name" name="name4" id="prodName4" placeholder="" value="" 
+                                  maxlength="18"  type="text" style="float:left;width:90px;" ><div style="float:left;">＋</div>
+                                  <input class="form-control name" name="name5" id="prodName5" placeholder="" value="" 
+                                  maxlength="18"  type="text" style="float:left;width:90px;" ><span style="float:left;">＋</span>
+                                  <input class="form-control name" name="name6" id="prodName6" placeholder="" value="" 
+                                  maxlength="18"  type="text" style="float:left;width:90px;"  >
+							    <span style="color:red; float:left; padding-left:15px; line-height:35px;" id="proWarn"></span>
+                            </div>
+                        </div>
+						
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商品价格</label>
+
+                            <div class="col-sm-10">
+                                <input class="form-control" name="price" id="price" placeholder="" readOnly value="{$product.price}"
+                                       type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">图片</label>
+
+                            <div class="col-sm-10">
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-new img-thumbnail">
+                                        <empty name="product.file_id"><img
+                                                src="__PUBLIC__/Admin/dist/img/noimage.gif">
+                                            <else/>
+                                            <img src="__PUBLIC__/Uploads/{$product.savepath}{$product.savename}">
+                                        </empty>
+                                        <input class="form-control" name="file_id" id="file_id" placeholder=""
+                                               value="{$product.file_id}"
+                                               type="hidden">									
+
+                                        <div class="edit_pic_mask">
+                                            <i class="fa fa-plus-circle" onclick="imageUploader(this,false)" class="imageup"></i>
+                                            <i class="fa fa-minus-circle" onclick="removeImage(this,false)" class="imageup"></i>
+                                        </div>
+										
+                                    </div>
+									<span style="color:red;" id="file_idwarn">请上传图片</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">备注</label>
+
+                            <div class="col-md-10">
+                                <input class="form-control" name="remark" placeholder="" value="{$product.remark}"
+                                      maxlength="20"  type="text">
+								
+                            </div>
+                        </div>
+                       
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">商品详情</label>
+
+                            <div class="col-sm-10">
+                                <!-- 加载编辑器的容器 -->
+                                <script id="UEditor" name="detail" type="text/plain" style="height:200px;">
+                                    {$product.detail}
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+
+                    <div class="box-footer">
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-block btn-danger" id="saveInfo">保存</button>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-block btn-default" onclick="history.go(-1)">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- /.box -->
+
+        </div>
+        <!--/.col (right) -->
+    </div>
+</section>
+<script type="text/javascript">
+    $(function () {
+	    $("#timeWarn").hide();
+		  $("#proWarn").hide();
+		  $("#file_idwarn").hide();
+       getPrice();
+      /*  var startDate = $("#startDate").val();
+        var endDate = $("#endDate").val();
+        alert(startDate);
+        alert(endDate);*/
+        //实例化编辑器异步载入
+        var editor = new UE.ui.Editor();
+        editor.render("UEditor");
+
+        if ('{$product}') {
+            $('select[name="menu_id"]').val('{$product.menu_id}');
+        }
+        
+         $('#reservationtime').daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 30,
+            format: 'YYYY-MM-DD',
+            separator: ' --- ',
+            todayHighlight:true,
+            minDate: new Date(),
+            //maxDate: endDate,
+            // startDate:startDate,
+            //endDate:endDate,
+        }); 
+		
+		/*$("#prodName").blur(function(){
+		
+		    var prodName = $("#prodName").val();
+			if(prodName==null || prodName =='')
+			{  
+			   $("#proWarn").text("商品名称不能为空!");
+			   $("#proWarn").show();
+			   }
+			else
+			{
+			  
+			  $("#proWarn").empty();
+			  $("#proWarn").hide();
+			
+			}
+		
+		});*/
+        $(".imageup").click(function(){
+		     var file_id=$('#file_id').val();
+			 if(file_id==null || file_id=='')
+			 {
+			    $("#file_idwarn").show();
+			 }else
+			 {
+			    $("#file_idwarn").hide();
+			 }
+		     
+		});
+		
+        
+    });
+
+    function addAttribute() {
+        var obj = $('.cloneAttr').first().clone();
+        obj.find('input').val('');
+        $('#addAttrBtn').before(obj);
+    }
+	//根据菜单的更换查询价格
+   function getPrice() {
+  
+    var menuvalue=$("#menu_id").val();
+		if(menuvalue!=null && menuvalue!='')
+		{
+			$.ajax({
+				type: "post",
+				url: "{:U('Home/shop/getPrice')}",
+				data: {
+					menuId: menuvalue,
+				},
+				success: function (res) {
+					          $("#price").val(res.price);
+                    $("#startDate").val(res.startDate);
+                    $("#endDate").val(res.endDate);
+                    //$("#menuWarn").empty();
+                    //alert(res.startDate);
+                    //alert(res.endDate);
+
+                    $("#menuwarn").text("*此菜单时间范围是"+res.startDate+"到"+res.endDate);
+					}				
+				
+			});
+		   
+		}
+        
+       // return flag;
+    }
+    function checkOrderDate() {
+    	var timeRange = $('#reservationtime').val();
+		var menu_id = $('#menu_id').val();
+        $.ajax({
+            type: "post",
+            url: "{:U('Home/shop/getExistOrder')}",
+            data: {
+            	timeRange: timeRange,
+				      menu_id:menu_id,
+            },
+            success: function (res) {
+               if(res.total<=0)
+               {
+                 $("#timeWarn").empty();
+                 $("#timeWarn").text("超出菜单时间范围,请重新选择时间！");
+                  $("#timeWarn").show();
+               }
+
+               
+                else if(res.count>0)
+                {
+                	//alert("您选择的日期内已经有此菜单,请重新选择时间！");
+      					 $("#timeWarn").empty();
+      					 $("#timeWarn").text("您选择的日期内已经有此菜单,请重新选择时间！");
+      					 $("#timeWarn").show();
+                	//$("#timeFlag").val(res.count);
+                	//flag =  false;
+                }else
+        				{
+        				     $("#timeWarn").empty();
+        				     $("#timeWarn").hide();
+        				}
+				/*else
+                {
+                	//$("#timeFlag").val(res.count);                	
+                	//$("#saveInfo").attr("disabled", false);
+                }
+				*/
+                
+            }
+        });
+       // return flag;
+    }
+    $("#saveInfo").click(function(){
+    	
+    	
+         var prodName="";
+         for(var i=1;i<=6;i++)
+         {
+           //alert( name[i].value);
+           prodName=prodName+$("#prodName"+i).val();
+         }
+       
+        
+    	 var  timestr = $('#reservationtime').val();
+		   var file_id=$('#file_id').val();
+    	 if(prodName==null || prodName =='')
+         {
+      		 $("#proWarn").text("商品名称不能为空");
+  			    $("#proWarn").show();
+         }else if(timestr==null||timestr==''){
+        	 //alert("配送时间不能为空");
+      			 $("#timeWarn").text("配送时间不能为空");
+      			 $("#timeWarn").show();
+      		
+      		     $("#proWarn").empty();		 
+      			 $("#proWarn").hide();
+         }else if(file_id==null || file_id=='')
+		    {
+  		    $("#file_idwarn").show();
+              $("#proWarn").empty();         
+              $("#proWarn").hide();
+              $("#timeWarn").empty(); 
+              $("#timeWarn").hide();
+  		 }else{
+  		  $("#timeWarn").empty();
+  		  $("#timeWarn").hide();
+  		  $("#proWarn").empty();
+  		  $("#proWarn").hide();
+        	 //checkOrderDate();
+			 //var count = $("#timeFlag").val();
+			 //alert("count--->"+count);
+			// return;
+			var timeRange = $('#reservationtime').val();
+		    var menu_id = $('#menu_id').val();
+    	
+			$.ajax({
+				type: "post",
+				url: "{:U('Home/shop/getExistOrder')}",
+				data: {
+					timeRange: timeRange,
+					menu_id:menu_id,
+				},
+				success: function (res) {
+            if(res.total<=0)
+               {
+                 $("#timeWarn").empty();
+                 $("#timeWarn").text("超出菜单时间范围,请重新选择时间！");
+                  $("#timeWarn").show();
+               }
+        			    				  
+					else if(res.count<=0)
+					{
+					  $("#timeWarn").empty();
+						$("#timeWarn").hide();
+						$("#proWarn").empty();
+						$("#proWarn").hide();
+						$("#addAction").submit();
+						
+						
+					}else
+					{
+					    $("#timeWarn").text("您选择的日期内已经有此菜单,请重新选择时间！");
+						  $("#file_idwarn").hide();
+					    $("#timeWarn").show();
+					    //alert("您选择的日期内已经有此菜单,请重新选择时间！");
+					}
+					
+				}
+			});
+        	 
+        	 
+         }
+    	
+       }); 
+	   
+</script>
+<style>
+.form-control{
+  width:337px;
+}
+.input-group .form-control {
+ width:300px;
+}
+</style>

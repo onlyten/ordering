@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta content="telephone=no" name="format-detection">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>订单评价</title>
+	<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.css">
+<body style="background:#eae9e8">
+
+<if condition="$nono eq 1">还没有评论</if>
+<foreach name="comment" item="vo">
+<div style="height:200px;background:#fff;margin-top:15px;position: relative;"><br/>
+	<div style="margin-left:5%">
+		<img src="{$user[0]["photo"]}" style="width:30px;border-radius:60%;">{$user[0]["name"]}
+	</div>
+	<div style="float:right;margin-right:5%;top:15px;right:0;position: absolute">
+		{$vo.time}
+	</div><br/>
+	<div style="margin-left:15%;margin-right:15%;">
+		{$vo.name}
+	</div><br/>
+	<if condition="$vo.remark neq null">
+		<div style="margin-left:15%;margin-right:15%;">
+			<font color="red">商家回复：{$vo.remark}</font>
+		</div>
+	</if>
+	
+</div>
+</foreach>
+
+
+<form method="post" action="{:U('comment_update')}" onsubmit="return checkform()">
+   <input style="font-size:16px;" type="text" class="text" id="comment" name="comment" placeholder="请输入你的评价！" value=""/>
+   <input type="hidden" name="order_id" id="order_id" value="{$order_id}">
+   <button class="submit" type="submit" style="margin-top:8%">提交</button>
+</form>
+     
+    <script language="javascript">
+		function checkform()
+		{
+			var comment = document.getElementById("comment").value;
+			if(comment == ''){
+				alert("请输入你的评价！");
+				return false;
+			}
+		}
+	</script>
+</body></html>

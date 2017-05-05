@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html>
+
+    <head>
+       <meta charset="utf-8" />
+        <meta  http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-Language" content="en" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+        <meta name="misapplication-tap-highlight" content="no" />
+        <meta name="HandheldFriendly" content="true" />
+        <meta name="MobileOptimized" content="320" />
+        <title>我的订单</title>
+        <link rel="stylesheet" href="__CSS__/common.css" type="text/css" charset="utf-8" />
+        <link href="__CSS__/bootstrap-combined.min.css" rel="stylesheet">
+        <script type="text/javascript" src="__JS__/jquery-1.7.2.js"></script>
+        <script type="text/javascript" src="__JS__/bootstrap.min.js"></script>
+    </head>
+
+    <body>
+        <header id="header">
+            <div class="nvbt" onclick="javascript :history.back(-1);"><img src="__PICURL__/back.png"/></div>
+            <div class="nvtt">订餐详情</div>
+            <div class="nvbt iphone"><img src="__PICURL__/phone.png"/></div>
+        </header>
+        <div id="pageContent" class="pageContent sdcontent orderDetil">
+                <ul>
+                <div class="grayDivBackGround">
+                    <!--这是页面显示效果，内部无值-->
+                </div>
+                <li>
+
+                    <div class="liOrderTop detilTop">
+                        <div class="liLeft detilLiLeft" onclick=""><img width="45px" src="__PUBLIC__/Uploads/{$savepath}{$savename}"/> {$shop["name"]} </div>
+                        <div class="liRight detilLiRight"><img src="__PICURL__/next.png"/></div>
+                    </div>
+                    <div class="liOrderFoot detilFoot">
+                        <ul>
+                        <foreach name="order_detail" item="vo" key="k">
+                            <li>
+                                <div class="detilLeft">
+                                    {$vo.order_date}
+                                </div>
+                                <div class="detilMiddle">
+                                    {$vo.name}
+                                </div>
+                                <div class="detilRight">
+                                    ￥{$vo.price}
+                                </div>
+                            </li>
+                        </foreach>
+                            <li>
+                                <ul class="orderUl">
+                                    <li>
+                                        送餐日期：{$range}
+                                    </li>
+                                    <li>
+                                        配送地址：{$user_message["xsxm"]}   {$user_message["xxmc"]}{$user_message["bjmc"]}
+                                    </li>
+                                    <li>
+                                        订单号码：{$order["orderid"]}
+                                    </li>
+                                    <li>
+                                        订单时间：2016.07.08
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                </li>
+            </ul>
+            
+        </div>
+        <div id="footer" class="footer">
+            <if condition="$order['pay_status'] eq 0">
+            <a href="{:U('User/cart_pay_again',array('order_id'=>$order["orderid"]))}">
+                <div class="payNow">
+                        立即支付
+                </div>
+            </a>
+            </if>
+            <if condition="$order['pay_status'] eq 1">
+                <if condition="$shop['is_leave'] eq 1">
+                    <a href="{:U('leave',array('order_id'=>$order['id'],'menu_id'=>$order['menu_id']))}">
+                        <div class="footBMi" style="background-color:#FF6766 ;">    
+                            请假              
+                        </div>
+                    </a>
+                </if>
+                <if condition="$shop['is_retreat'] eq 1">
+                    <a href="{:U('order_cancel',array('order_id'=>$order['id'],'menu_id'=>$order['menu_id']))}" onClick="return confirm('确定退餐?');">
+                        <div class="footBLeft" style="background-color:#F8832E;">   
+                            退餐
+                        </div>
+                    </a>
+                </if>
+                <a href="{:U('comment',array('order_id'=>$order['id']))}">
+                    <a href="{:U('comment',array('order_id'=>$order['id']))}">
+                        <div class="footBRight" style="background-color: #FF6766;"> 
+                            评价
+                        </div>
+                    </a>
+                </a>
+            </if>        
+        </div>
+
+
+            <!-- <div class="footBLeft" style="background-color:#F8832E;">   
+                退餐
+            </div>
+            <div class="footBMi" style="background-color:#FF6766 ;">    
+                请假              
+            </div> -->
+
+            <!-- <div class="footBRight" style="background-color: #FF6766;"> 
+                更换套餐
+            </div> -->
+            
+            
+            <!-- <div class="payNow">
+                立即支付
+            </div> -->
+
+        </div>
+    </body>
+
+</html>

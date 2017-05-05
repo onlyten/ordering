@@ -1,0 +1,156 @@
+<section class="content-header">
+    <h1>
+        商城管理
+        <small></small>
+    </h1>
+</section>
+<style>
+    /*弹框样式*/
+    .hide_box{z-index:999;filter:alpha(opacity=50);background:#666;opacity: 0.5;-moz-opacity: 0.5;left:0;top:0;height:99%;width:100%;position:fixed;display:none;}
+    .shang_box{background-color:#fff;border-radius:5px;position:fixed;z-index:1000;left:50%;top:50%;margin-left:-450px;margin-top:-280px;display:none;}
+    .shang_box img{border:none;border-width:0;}
+    .shang_close{float:right;display:inline-block;}
+    .shang_top{ width:980px; background:#16aad8; height:40px; border-top-left-radius:5px; border-top-right-radius:5px; line-height:40px; padding-right:20px; }
+    #bottom-btn{
+        position: relative;
+        bottom: 10px;
+        left: 5px;
+    }
+</style>
+<!--弹框-->
+<div class="hide_box"></div>
+<div class="shang_box">
+    <div class="shang_top">
+	     <!--<a href="{:U('Home/Shop/updateMenu',array('id'=>$menu['id'],'status' => 1))}">确认发布</a>-->        
+		 <a class="shang_close" href="javascript:void(0)" onClick="fabuToggle()" title="关闭"  style="color:#FFFFFF; text-decoration:none;">关闭</a>
+    </div>
+    <br/>
+    <div style="max-height: 400px; overflow:auto;">
+        <table class="table table-bordered table-hover" id="tc">
+            <tbody></tbody>
+        </table>
+    </div>
+    <div id="bottom-btn" style="margin-top:25px;">
+
+    </div>
+</div>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <!-- /.col -->
+        <div class="col-md-12">
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title">菜单管理</h3>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body no-padding">
+                    <div class="mailbox-controls">
+                        <div class="btn-group">
+                            <a href="{:U('Home/Shop/addMenu')}" class="btn btn-danger ">
+                                新增菜单
+                            </a>
+                        </div>
+                        <!-- /.btn-group -->
+                    </div>
+                    <div class="table-responsive" style="overflow-x: visible;">
+                        <table class="table table-bordered table-hover">
+                            <tbody>
+                            <tr>
+                                <th class="hidden-xs">
+                                    <label><input onchange="checkAll()" type="checkbox" value=""></label>
+                                </th>
+                                <th>店铺名称</th>
+                                <th>菜单名称</th>
+<!--                            <th>图片</th>-->
+                                <th>菜单价格</th>
+								<th>开始时间</>
+								<!-- <th>排序</th>-->
+                                <th>结束时间</th>
+                                <th>操作</th>
+                            </tr>
+
+                            <volist name="menu" id="menu">
+                                <tr>
+                                    <td class="hidden-xs">
+                                        <label><input name="checkbox" class="check" type="checkbox" value="{$menu.id}"></label>
+                                    </td>
+
+                                    <td>
+                                        {$menu.shop.name}
+                                    </td>
+                                    <td>{$menu.name}</td>
+								    <td><span style="background-color: #dd4b39;" class="badge">{$menu.price}元</span></td>
+                                   <!-- <td>
+                                        <if condition="$menu.savepath && $menu.savename">
+                                            <img style="height: 48px;max-width: 72px"
+                                                 src="__PUBLIC__/Uploads/{$menu.savepath}{$menu.savename}">
+                                        </if>
+                                    </td>-->
+                                    <!-- <td>{$menu.rank}</td>-->
+                                    <!--<td>{$menu.remark}</td>>-->
+									<td>{$menu.start_time}</td>
+									<td>{$menu.end_time}</td>
+                                    <td class="table-action">
+									        
+											<if condition="$menu.status eq 1">											 
+									        已发布
+											</if>
+											<if condition="$menu.status eq 0">
+											<a href="javascript:void(0)" onClick="fabuToggle({$menu.id})" class="dashang" title="发布菜单">发布菜单</a>
+											<!--<a href="{:U('Home/Shop/updateMenu',array('id'=>$menu['id'],'status' => 1))}">发布菜单</a>-->
+											 <a href="{:U('Home/Shop/modifyMenu',array('id'=>$menu['id']))}">修改</a>
+											<a href="{:U('Home/Shop/delMenu',array('id'=>$menu['id']))}">删除</a>
+											</if>
+											<if condition="$menu.status eq 2">
+											历史菜单
+											</if>
+                                    </td>
+                                </tr>
+                            </volist>
+                            </tbody>
+                        </table>
+                        <div class="box-footer no-padding">
+                            <div class="mailbox-controls">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-danger "
+                                            onclick="batchUrl('{:U(\'Home/Shop/delMenu\')}')">全部删除
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.mail-box-messages -->
+                </div>
+            </div>
+            <!-- /. box -->
+        </div>
+        <!-- /.col -->
+    </div>
+</section>
+
+<script type="text/javascript">
+     /*弹框JS内容*/
+    function fabuToggle(menu_id){
+
+	       $.post('{:U(\'Home/Shop/productlist\')}',{menu_id},function(data){
+            var html = '<tr><th>商品时间</th><th>商品名称</th><th>价格</th></tr>';
+		    obj= $.parseJSON(data)			   		
+            //多维数组循环		    
+            $.each(obj,function(index,content){
+			//表格内容			
+            html +='<tr><td>'+ content['order_date'] + '</td><td>' + content['name'] + '</td><td>' + content['price'] + '元</td></tr>';
+            });
+			if(obj != ""){
+			var btn ='<a class="btn btn-primary" href="{:U(\'Home/Shop/updateMenu\')}/?menu_id='+menu_id+'">确认发布</a>';
+                $('#bottom-btn').html(btn);
+			}
+            $('#tc tbody').html(html);            
+
+        })   
+		    $(".hide_box").fadeToggle();
+            $(".shang_box").fadeToggle();
+    }
+</script>

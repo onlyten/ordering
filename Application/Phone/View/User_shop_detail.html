@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta content="telephone=no" name="format-detection">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1.0" />
+	<link rel="stylesheet" href="__CSS__/common.css" type="text/css" charset="utf-8" />
+	<style type="text/css">
+	  .line{ background:#fff;padding-top:30px;padding-bottom:30px; }
+	  .erj{ margin-left:5%;margin-right:5%; }
+	  a{ text-decoration:none; }
+	  </style>
+	<title>店铺详情</title>
+
+<body style="background:#eae9e8;margin:0;font-size:20px;">
+<header id="header">
+    <div class="nvbt" onclick="javascript :history.back(-1);"><img src="__PICURL__/back.png" style="margin-top:12px;"/></div>
+    <div class="nvtt">{$shop.name}</div>
+</header>
+
+<!-- <div style="background:#B0B0B0;color:white;padding-top:10px;padding-bottom:10px">
+    <a href="#" onClick="javascript :history.back(-1);"><div style="float:left;width:33%;"><div style="margin-left:10px;color:white">back</div></div></a>
+    <div style="float:left;width:34%;text-align:center">{$shop.name}</div><br/>
+</div> -->
+
+
+<div style="background:#fff;margin-top:45px;height:180px">
+	<center>
+		<img style="height:120px;width:120px;border-radius:60%;" src="__PUBLIC__/Uploads/{$shop.savepath}{$shop.savename}"/><br/>
+		<font size="4px">{$shop.name}</font>
+	</center>
+</div><br/>
+
+<div class="line">
+	<center><font size="4px">店铺公告</font></center><br/>
+	<div class="erj">
+		{$shop.notification}
+	</div>
+</div><br/>
+
+<div class="line">
+	<div class="erj">
+		联系电话：<a href="tel:{$shop["tel"]}">{$shop["tel"]}</a>
+	</div>
+</div><br/>
+
+<div class="line">
+	<div class="erj">
+		联系地址：{$shop["address"]}
+	</div>
+</div>
+
+
+</body></html>

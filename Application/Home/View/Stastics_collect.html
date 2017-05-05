@@ -1,0 +1,279 @@
+<section class="content-header">
+    <h1>
+        订餐统计日汇总
+        <small></small>
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-default">
+			 <div class="box-header with-border">
+                    <h3 class="box-title">订餐搜索</h3>
+                </div>
+                <form name="reg_testdate" class="form-horizontal" action="{:U('Home/Stastics/collect')}" method="get">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">学校</label>
+                            <div class="col-sm-3">
+                                <select name="schoolId" class="form-control" id="schoolId">
+                                   <volist name="vlist" id="school" key="k">
+                                    <option value="{$school.company_id}" >
+									{$school.xxmc}</option>									
+								   </volist>
+                                </select>
+                            </div>
+
+                            <label class="col-sm-1 control-label" style="width:120px;">订餐时间</label>
+                            <div class="col-sm-3"  style="width:340px;height:34px;">
+                                <select name="year" id="year" onChange="getYearMonth(this.value)" 
+								 style="width:100px;display:inline"  class="form-control">									
+								</select>
+								<select name="month" id="month" onChange="getMonthDay(this.value)" 
+								style="width:80px;display:inline"  class="form-control">									
+								</select>
+								<select name="day" id="day" style="width:108px;display:inline"  class="form-control">
+									
+								</select>
+                            </div>
+                        </div>						
+                    </div>
+                    <!-- /.box-body -->
+					<div class="box-footer">
+                        <div class="col-sm-2">
+                            <button type="submit" class="btn btn-block btn-danger">开始查询</button>
+                        </div>						
+                    </div>
+                </form>
+            </div>
+            <!-- /.box -->
+        </div>
+        <!--/.col (right) -->
+    </div>
+
+    <div class="row">
+        <!-- /.col -->
+        <div class="col-md-12">
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title">统计管理</h3>
+                    <!-- /.box-tools -->					
+                </div>				 
+                <!-- /.box-header -->
+                <div class="box-body no-padding">
+                   <div class="mailbox-controls">
+                        <div class="btn-group">
+                            <!--<a 
+                               target="_blank" class="btn btn-danger" id="exportStastics">
+                                导出统计信息
+                            </a>-->                          
+                        </div>
+						 <div class="btn-group">
+                            <a 
+                               target="_blank" class="btn btn-danger" id="printl" onclick="preview(1);">
+                                打印
+                            </a>                           
+                        </div>
+                        <!-- /.btn-group -->
+                    </div>
+					<!--startprint1-->
+                    <div class="table-responsive" style="overflow-x: visible; padding-left:2%;">
+                        <table class="table table-bordered table-hover">
+                            <volist name="class" id="cl">
+                                <div style="width:48%; border:#CBCBCB 1px solid; float:left; margin:5px;">
+                                    <div style="height:35px;border-bottom:#CBCBCB 1px solid;">
+                                        <ul  style="list-style:none;  margin:0;">
+                                            <li style=" float:left;  text-align:left; line-height:35px;  margin-left:-20px;">{$cl.bjmc}</li>
+                                            <li  style="  float:right; line-height:35px; text-align:right; padding-right:13px;">{$cl.now}</li>
+                                        </ul>
+                                    </div>
+                                    <volist name='cl.menu' id="clm">
+                                        <div style="height:35px;">
+                                            <ul style="list-style:none; margin:0;">
+                                                <li style=" float:left; margin:0; text-align:left; line-height:35px;">{$clm.name}</li>
+                                                <li  style=" float:right; text-align:right; line-height:35px; padding-right:60px;">{$clm.counts}份</li>
+                                            </ul>
+                                        </div>
+                                    </volist>
+
+                                    <div style="height:35px; border-top:#CBCBCB 1px solid;">
+                                        <ul style="list-style:none; margin:0;">
+                                            <li style=" width:60%; float:left; margin:0; text-align:left; line-height:35px; margin-left:-20px;">取货人：</li>
+                                            <li  style=" width:40%; float:left; text-align:left; line-height:35px; ">装箱审核：</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </volist>
+                        </table>
+
+                         <div class="box-footer no-padding">
+                            <div class="mailbox-controls">
+                                <div class="btn-group" style="height: 45px">
+                                </div>
+                                <!-- /.btn-group -->
+                                <div class="pull-right">
+                                    {$page}
+                                    <!-- /.btn-group -->
+                                </div>
+                                <!-- /.pull-right -->
+                            </div>
+                        </div>
+                    </div>
+					<!--endprint1--> 
+                    <!-- /.mail-box-messages -->
+                </div>
+            </div>
+            <!-- /. box -->
+        </div>
+        <!-- /.col -->
+    </div>
+</section>
+<script type="text/javascript">
+    function YYYYMMDDstart(){
+        MonHead = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        //先给年下拉框赋内容   
+        var y = new Date().getFullYear();
+        for (var i = (y - 30); i < (y + 30); i++) //以今年为准，前30年，后30年   
+            document.reg_testdate.year.options.add(new Option(" " + i + " 年", i));
+        //赋月份的下拉框   
+        for (var i = 1; i < 13; i++)
+            document.reg_testdate.month.options.add(new Option(" " + i + " 月", i));
+        document.reg_testdate.year.value = y;
+        document.reg_testdate.month.value = new Date().getMonth() + 1;
+        var n = MonHead[new Date().getMonth()];
+        if (new Date().getMonth() == 1 && IsPinYear(YYYYvalue)) n++;
+        writeDay(n); //赋日期下拉框Author:meizz  
+        document.reg_testdate.day.value = new Date().getDate();
+
+    }
+
+    function getYearMonth(str) //年发生变化时日期发生变化(主要是判断闰平年)   
+    {
+        var MMvalue = document.reg_testdate.month.options[document.reg_testdate.month.selectedIndex].value;
+        if (MMvalue == "") {
+            var e = document.reg_testdate.day;
+            optionsClear(e);
+            return;
+        }
+        var n = MonHead[MMvalue - 1];
+        if (MMvalue == 2 && IsPinYear(str)) n++;
+        writeDay(n)
+    }
+
+    function getMonthDay(str) //月发生变化时日期联动   
+    {
+        var YYYYvalue = document.reg_testdate.year.options[document.reg_testdate.year.selectedIndex].value;
+        if (YYYYvalue == "") {
+            var e = document.reg_testdate.day;
+            optionsClear(e);
+            return;
+        }
+        var n = MonHead[str - 1];
+        if (str == 2 && IsPinYear(YYYYvalue)) n++;
+        writeDay(n)
+    }
+
+    function writeDay(n) //据条件写日期的下拉框   
+    {
+        var e = document.reg_testdate.day;
+        optionsClear(e);
+        for (var i = 1; i < (n + 1); i++)
+            e.options.add(new Option(" " + i + " 日", i));
+        //删除第一个空option
+        document.reg_testdate.day.options.remove(0); 
+    }
+
+    function IsPinYear(year) //判断是否闰平年   
+    {
+        return (0 == year % 4 && (year % 100 != 0 || year % 400 == 0));
+    }
+
+    function optionsClear(e) {
+        e.options.length = 1;
+    }
+    $(function () {
+		YYYYMMDDstart();
+        if ('{$productPost}') {		
+			$('select[name="year"]').val('{$productPost.year}');
+				$('select[name="month"]').val('{$productPost.month}');
+				$('select[name="day"]').val('{$productPost.day}');
+				$('select[name="schoolId"]').val('{$productPost.schoolId}');
+        }else{
+		    var sel = document.getElementById("schoolId");  			
+			if(sel.length>0)
+			{
+			 sel.options[0].selected = true;  
+			}
+		}
+		$("#exportStastics").click(function(){
+			var schoolId = $("#schoolId").val();			
+			var year = $("#year").val();
+			var month = $("#month").val();
+			var day = $("#day").val();        
+            //打印			
+			window.location.href = "{:U('Home/Stastics/export')}?schoolId="+schoolId+"&year="+year+"&month="+month+"&day="+day;
+			  
+		});
+		$(".detail").click(function(){			
+			var classid = $(this).attr("id");			
+			var year = $("#year").val();
+			var month = $("#month").val();
+			var day = $("#day").val();
+            var param = {}; // 组装发送参数			
+		    param['schoolId']  =schoolId;
+            param['year'] = year;
+		    param['month']  =month;
+            param['day'] = day;
+		   window.location.href = "{:U('Home/Stastics/detail')}?classid="+classid+"&year="+year+"&month="+month+"&day="+day;
+			  
+		});
+		
+		   
+			
+    });
+	
+</script>
+<script>
+//实现打印方法 
+function preview(oper){  
+    $(".hideDetail").hide();
+	if (oper < 10){  
+		var year = $("#year").val();
+		var month = $("#month").val();
+		var day = $("#day").val();
+		bdhtml=window.document.body.innerHTML;//获取当前页的html代码  
+		sprnstr="<!--startprint"+oper+"-->";//设置打印开始区域  
+		eprnstr="<!--endprint"+oper+"-->";//设置打印结束区域  
+		prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr)+18); //从开始代码向后取html  
+		prnhtmlprnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));//从结束代码向前取html  
+		window.document.body.innerHTML=prnhtml;  
+		window.print();  
+		
+		window.document.body.innerHTML=bdhtml; 
+        $(".hideDetail").show();		
+   
+         if ('{$productPost}') {
+				$('select[name="year"]').val('{$productPost.year}');
+				$('select[name="month"]').val('{$productPost.month}');
+				$('select[name="day"]').val('{$productPost.day}');
+				$('select[name="schoolId"]').val('{$productPost.schoolId}');				
+        }else{
+		    $('select[name="year"]').val(year);
+			$('select[name="month"]').val(month);
+			$('select[name="day"]').val(day);
+	
+		    var sel = document.getElementById("schoolId");  
+			if(sel.length>0){
+			   sel.options[0].selected = true;
+            }			   
+		}
+    }else{  
+        window.print(); 
+	   
+    }  
+}  
+</script>  
+  

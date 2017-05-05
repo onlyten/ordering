@@ -1,0 +1,307 @@
+                    <!--遮罩层上传-->
+                        
+                        <div id="bg"></div>
+                        <div id="show"> 
+                            <a style="float:right; font-size:20px; margin-top:-10px;" id="close" onclick="hidediv();">×</a>
+
+                            <form action="{:U('Home/Shop/import')}" method="post" class="form-horizontal" >    
+                                 <input type="file" name="filename">   
+                                <input type="submit" value="上传"></input>
+                            </form>
+
+                        
+                        </div>
+                        <!--遮罩层上传end-->
+
+<section class="content-header">
+    <h1>
+        商城管理
+        <small></small>
+    </h1>
+</section>
+<script language="javascript" type="text/javascript">
+
+function showdiv() {            
+            document.getElementById("bg").style.display ="block";
+            document.getElementById("show").style.display ="block";
+        }
+function hidediv() {
+            document.getElementById("bg").style.display ='none';
+            document.getElementById("show").style.display ='none';
+        }
+</script>
+<style type="text/css">
+.div1{
+float: left;
+height: 35px;
+line-height: 35px;
+color: #fff;
+background: #16aad8;
+width: 120px;
+position:relative;
+border-radius: 3px;
+}
+.div2{
+text-align:center;
+}
+.inputstyle{
+    width: 144px;
+    height: 41px;
+    cursor: pointer;
+    font-size: 30px;
+    outline: medium none;
+    position: absolute;
+    filter:alpha(opacity=0);
+    -moz-opacity:0;
+    opacity:0; 
+    left:0px;
+    top: 0px;
+}
+        #bg{ display: none;  position: absolute;  top: 0%;  left: 0%;  width: 100%;  height: 100%;  background-color: black;  z-index:1001;  -moz-opacity: 0.7;  opacity:.70;  filter: alpha(opacity=70);}
+        #show{display: none;  position: absolute;  top: 10%;  left: 36%;  width: 33%;  height: 10%;  padding: 8px;  border: 8px solid #E8E9F7;  background-color: white;  z-index:1002;  overflow: auto;}
+</style>
+                         
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-default">
+                <div class="box-header with-border">
+                    <h3 class="box-title">商品搜索</h3>
+                </div>
+                <!-- form start -->
+                <form class="form-horizontal" action="{:U('Home/Shop/productSearch')}" method="post">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label" style="padding-right:0px;">商品名称</label>
+
+                            <div class="col-sm-3">
+                                <input class="form-control" name="name" placeholder="" value="{$productPost.name}"
+                                       type="text">
+                            </div>
+
+							<!--
+                            <label class="col-sm-1 control-label">推荐状态</label>
+
+                            <div class="col-sm-3">
+                                <select name="recommend" class="form-control">
+                                    <option value="-10">不选择推荐状态</option>
+                                    <option value="0">正常</option>
+                                    <option value="1">推荐</option>
+                                </select>
+                            </div>
+                        </div>
+
+                         <div class="form-group">
+                            <label class="col-sm-1 control-label">商品状态</label>
+
+                            <div class="col-sm-3">
+                                <select name="status" class="form-control">
+                                    <option value="-10">不选择商品状态</option>
+                                    <option value="0">下架</option>
+                                    <option value="1">出售</option>
+                                </select>
+                            </div>
+							 
+
+							 -->
+                            <label class="col-sm-1 control-label" style="padding-right:0px;">时间范围</label>
+
+                            <div class="col-sm-7">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                    <input type="text" class="form-control pull-right" name="timeRange"
+                                           id="reservationtime" value="{$productPost.timeRange}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+
+                    <div class="box-footer">
+                        <div class="col-sm-2">
+                            <button type="submit" class="btn btn-block btn-danger">开始搜索</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- /.box -->
+        </div>
+        <!--/.col (right) -->
+    </div>
+
+    <div class="row">
+        <!-- /.col -->
+        <div class="col-md-12">
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title">商品管理</h3>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body no-padding">
+                    <div class="mailbox-controls">
+                        <div class="btn-group">
+                            <a href="{:U('Home/Shop/addProduct')}" class="btn btn-danger ">
+                                新增商品
+                            </a>
+                        </div>
+                        <div class="btn-group">
+                            <a href="{:U('Home/Shop/exportProduct')}" target="_blank" class="btn btn-danger ">
+                                导出全部商品
+                            </a>
+                        </div>
+                        <div class="btn-group">
+                            <a href="{:U('Home/Shop/export')}" target="_blank" class="btn btn-danger ">
+                                导出 导入模板
+                            </a>
+                        </div>
+                        <div class="btn-group">
+                            <a  target="_blank" class="btn btn-danger " onclick="showdiv();">
+                                导入
+                            </a>
+                            <!-- <input id="btnshow" type="button" value="导入" onclick="showdiv();"/> -->
+                        </div>
+                       
+                        <!-- /.btn-group -->
+                    </div>
+                    <div class="table-responsive" style="overflow-x: visible;">
+                        <table class="table table-bordered table-hover">
+                            <tbody>
+                            <tr>
+                                <th class="hidden-xs">
+                                    <label><input onchange="checkAll()" type="checkbox" value=""></label>
+                                </th>
+
+                                <th>店铺名称</th>
+                                <th>菜单</th>
+                                <th>商品名称</th>
+                                <th>图片</th>
+                                
+                                <th>价格</th>
+                              
+                               
+                                <!--<th>出售状态</th>-->
+                                
+                                <th>配送时间</th>
+                                <th>操作</th>
+                            </tr>
+                            <volist name="productList" id="product">
+                                <tr>
+                                    <td class="hidden-xs">
+                                        <label><input name="checkbox" class="check" type="checkbox"
+                                                      value="{$product.id}"></label>
+                                    </td>
+
+                                    <td>
+                                        {$product.shop.name}
+                                    </td>
+                                    <td>{$product.menu_name}</td>
+                                    <td>{$product.name|msubstr=0,12}</td>
+                                    <td>
+                                        <if condition="$product.savepath && $product.savename">
+                                            <img style="height: 48px;max-width: 72px"
+                                                 src="__PUBLIC__/Uploads/{$product.savepath}{$product.savename}">
+                                        </if>
+                                    </td>
+                                   
+                                    <td><span style="background-color: #dd4b39;" class="badge">{$product.price}元</span></td>
+                                    
+                                   
+                                    
+                                   <!-- <td>
+                                        <if condition="$product.status eq 1">
+                                            <span class="label label-success">出售</span>
+                                            <elseif condition="$product.status eq -1"/>
+                                            下架
+                                            <else/>
+                                            <span class="label label-default">售罄</span>
+                                        </if>
+                                    </td>-->
+                                   
+                                    <td>{$product.order_date}</td>
+                                    <td class="table-action">
+									<!--
+                                        <if condition="$product.status eq -1">
+                                            <a href="{:U('Home/Shop/updateProduct',array('id'=>$product['id'] , 'status'=>1))}">出售</a>
+                                            <a href="{:U('Home/Shop/updateProduct',array('id'=>$product['id'] , 'status'=>0))}">售罄</a>
+                                            <elseif condition="$product.status eq 1"/>
+                                            <a href="{:U('Home/Shop/updateProduct',array('id'=>$product['id'] , 'status'=>-1))}">下架</a>
+                                            <a href="{:U('Home/Shop/updateProduct',array('id'=>$product['id'] , 'status'=>0))}">售罄</a>
+                                            <else/>
+                                            <a href="{:U('Home/Shop/updateProduct',array('id'=>$product['id'] , 'status'=>1))}">出售</a>
+                                            <a href="{:U('Home/Shop/updateProduct',array('id'=>$product['id'] , 'status'=>-1))}">下架</a>
+                                        </if>
+										-->
+
+                                        <!--<a href="{:U('Home/Shop/modifyProduct',array('id'=>$product['id']))}">修改</a><a
+                                            href="{:U('Home/Shop/delProduct',array('id'=>$product['id']))}">删除</a></td>-->
+                                </tr>
+                            </volist>
+                            </tbody>
+                        </table>
+                        <div class="box-footer no-padding">
+                            <div class="mailbox-controls">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-danger"
+                                            onclick="batchUrl('{:U(\'Home/Shop/delProduct\')}')">全部删除
+                                    </button>
+                                </div>
+
+								<!--
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-danger"
+                                            onclick="batchUrl('{:U(\'Home/Shop/updateProduct\',array(\'status\'=>1))}')">
+                                        上架
+                                    </button>
+                                </div>
+
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-danger"
+                                            onclick="batchUrl('{:U(\'Home/Shop/updateProduct\',array(\'status\'=>-1))}')">
+                                        下架
+                                    </button>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-danger"
+                                            onclick="batchUrl('{:U(\'Home/Shop/updateProduct\',array(\'status\'=>0))}')">
+                                        售罄
+                                    </button>
+                                </div>
+
+								-->
+                                <div class="pull-right">
+                                    {$page}
+                                    <!-- /.btn-group -->
+                                </div>
+                            </div>
+                            <!-- /.btn-group -->
+                            <!-- /.pull-right -->
+                        </div>
+                    </div>
+                </div>
+                <!-- /.mail-box-messages -->
+            </div>
+        </div>
+        <!-- /. box -->
+    </div>
+    <!-- /.col -->
+    </div>
+</section>
+<script type="text/javascript">
+    $(function () {
+        $('#reservationtime').daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 30,
+            format: 'YYYY-MM-DD',
+            separator: ' --- ',
+        });
+        if ('{$productPost}') {
+            $('select[name="recommend"]').val('{$productPost.recommend}');
+            $('select[name="status"]').val('{$productPost.status}');
+        }
+    });
+</script>

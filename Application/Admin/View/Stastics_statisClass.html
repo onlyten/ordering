@@ -1,0 +1,117 @@
+<section class="content-header">
+    <h1>
+        班级订餐统计
+        <small></small>
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+   
+
+    <div class="row">
+        <!-- /.col -->
+        <div class="col-md-12">
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title">班级统计</h3>
+                    <!-- /.box-tools -->
+					
+                </div>
+				 
+                <!-- /.box-header -->
+                <div class="box-body no-padding">
+                   <div class="mailbox-controls">
+                        <div class="btn-group">
+						<input type="hidden" id="classid" value="{$classid}"></input>
+						<input type="hidden" id="shopId" value="{$shopId}"></input>
+						<input type="hidden" id="year" value="{$year}"></input>
+						<input type="hidden" id="month" value="{$month}"></input>
+                             <a 
+                               target="_blank" class="btn btn-danger" id="exportStastics">
+                                导出统计信息
+                             </a>
+
+                           
+                        </div>
+						 <div class="btn-group">
+                             <a 
+                               target="_blank" class="btn btn-danger" id="printl" onclick="preview();">
+                                打印
+                             </a>
+
+                           
+                        </div>
+                        <!-- /.btn-group -->
+                    </div>
+					<!--startprint-->
+                    <div class="table-responsive" style="overflow-x: auto; overflow-y: auto;">
+                        <table class="table table-bordered table-hover">
+                            <tbody>
+								<tr>                              
+									<th style="width:100px;">姓&nbsp;&nbsp;&nbsp;&nbsp;名</th>
+									<volist name="arrDate" id="dat">
+										<th style="width:10px;">{$dat}</th>
+									</volist>
+									
+								</tr>								
+								<volist name="arrayList" id="p">
+									<tr style="width:100px;">
+										<td>{$p.stuName}</td>
+										<volist name="p.list" id="list">
+											<td style="width:10px;">{$list}</td>
+										</volist>
+									</tr>
+								</volist>							                           
+                            </tbody>
+                        </table> 
+                    </div>
+					<!--endprint--> 
+                    <!-- /.mail-box-messages -->
+                </div>
+            </div>
+            <!-- /. box -->
+        </div>
+        <!-- /.col -->
+    </div>
+</section>
+<script type="text/javascript">
+
+    $(function () {
+	
+	$("#exportStastics").click(function(){
+			
+			var classid = $("#classid").val();			
+			var year = $("#year").val();
+			var month = $("#month").val();		
+            var shopId = $("#shopId").val();			
+            //打印			
+			window.location.href = "{:U('Admin/Stastics/exportClass')}?classid="+classid+"&shopId="+shopId+"&year="+year+"&month="+month;
+			  
+		});
+		   
+			
+    });
+	
+</script>
+<script>
+//实现打印方法 
+function preview()         
+{  
+   
+	var year = $("#year").val();
+	var month = $("#month").val();
+	var day = $("#day").val();
+	bdhtml=window.document.body.innerHTML;//获取当前页的html代码  
+	sprnstr="<!--startprint-->";//设置打印开始区域  
+	eprnstr="<!--endprint-->";//设置打印结束区域  
+	prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr)+17); //从开始代码向后取html  
+	prnhtmlprnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr));//从结束代码向前取html  
+	window.document.body.innerHTML=prnhtml;  
+	window.print();  
+		
+	window.document.body.innerHTML=bdhtml; 
+       
+}  
+</script>  
+  

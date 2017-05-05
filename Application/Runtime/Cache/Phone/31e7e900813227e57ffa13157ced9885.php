@@ -1,0 +1,50 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html>
+    <head>
+        <title>用户登录</title>
+         <meta charset="utf-8">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-touch-fullscreen" content="yes">
+        <meta http-equiv="Access-Control-Allow-Origin" content="*">
+        <link href="/share/ordering/Public/Phone/css/login/login.css" type="text/css" rel="stylesheet">
+        <link href="/share/ordering/Public/Phone/css/login/global.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="login">
+            <div class="login-title"><p>订餐平台登录</p>
+                <i></i>
+            </div>
+            <form method="post" action="<?php echo U('login_update');?>" onsubmit="return checkform()">
+            <div class="login-bar">
+                <ul style="margin-left: 30px;">
+                    <li><img src="/ordering/Public/Phone/css/login/images/login_user.png"><input style="font-size:16px;" type="text" class="text" id="username" name="username" placeholder="请输入用户名" value="179201615004"/></li>
+                    <li><img src="/ordering/Public/Phone/css/login/images/login_pwd.png"><input style="font-size:16px;" type="password" class="psd" id="password" name="password" placeholder="请输入确认密码" value="000000"/></li>
+                </ul>
+            </div>
+           <!-- <center> <input style="margin-top:13%" type="checkbox" name="wechat" id="wechat" checked="checked" value="wx" /> <font color="white">绑定微信</font></center> -->
+            <div class="login-btn">
+                <button class="submit" type="submit" style="margin-top:8%">登录</button>
+            </div>
+            </form>
+        </div>
+    <script language="javascript">
+		function checkform()
+		{
+		var username = document.getElementById("username").value;
+		var password = document.getElementById("password").value;
+		if(username == ''){
+			alert("请输入用户名！");
+			return false;
+		}
+		if(password == ''){
+			alert("请输入密码！");
+			return false;
+		}
+
+
+		}
+		</script>
+    </body>
+</html>

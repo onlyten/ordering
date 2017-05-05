@@ -1,0 +1,164 @@
+
+<section class="content-header">
+    <h1>
+        消息管理
+        <small></small>
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title">消息发送</h3>
+                </div>
+                <!-- form start -->
+                <form action="{:U('Home/WxAccess/getAccessToken')}" method="post" class="form-horizontal" id="wxAccessForm">
+                    <div class="box-body">
+                                               
+						 <div class="form-group">
+                            <label class="col-sm-2 control-label">学校</label>
+							 <div class="col-sm-2">                              
+                                <select name="school" id="schools" onChange="getClass()" class="form-control">
+								    <option value="">-请选择-</option>
+                                    <volist name="schoolList" id="school">
+                                         <option value="{$school.schoolid}">{$school.xxmc}</option>
+                                          
+                                    </volist>
+                                    <!-- <option value="0" <if condition="$shop.is_day eq '0'">selected='selected'</if>>前一天</option> -->
+                                                                   
+                                </select>
+                            </div>
+                            <label class="col-sm-2 control-label">班级</label>
+                             <div class="col-sm-2">                              
+                                <select name="banji" id="banji" class="form-control">
+
+                                    
+                                    
+                                    <!-- <option value="0" <if condition="$shop.is_day eq '0'">selected='selected'</if>>前一天</option> -->
+                                                                   
+                                </select>
+                            </div>  						
+
+								
+                        </div>
+                    </div>
+                  
+                    <div class="box-footer">
+                        <div class="col-sm-2">
+                            <button type="button" id="tijiao" class="btn btn-block btn-danger">确定</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- /.box -->
+
+        </div>
+        <!--/.col (right) -->
+    </div>
+</section>
+
+<script>
+
+$().ready(function() {
+   
+    $("#banji").append( "<option value=''>-请选择-</option>");
+    $('#tijiao').click(function(){
+        var school = $("#schools").val();
+        var banji = $("#banji").val();
+        $.ajax({
+            type: "post",
+            url: "{:U('Home/WxAccess/getAccessToken')}",
+            data: {
+                school: school,
+                banji:banji,
+            },
+            success: function (res) {
+               
+                if(res!=null && res!='')
+                {
+                    if(res.errcode!=null && res.errcode!='')
+                    {
+                        alert("发送完成");
+                    }else
+                    {
+                        alert("发送失败请稍后");
+                    }
+                }else
+                {
+                    alert("失败");
+                }
+               /*if(res.total<=0)
+               {
+                 $("#timeWarn").empty();
+                 $("#timeWarn").text("超出菜单时间范围,请重新选择时间！");
+                  $("#timeWarn").show();
+               }*/
+           },error: function (res) {
+            alert(res);
+                
+                if(res!=null && res!='')
+                {
+                    if(res.errcode!=null && res.errcode!='')
+                    {
+                        alert("发送完成");
+                    }else
+                    {
+                        alert("有用户未关注公众号");
+                    }
+                }else
+                {
+                    alert("失败");
+                }
+               /*if(res.total<=0)
+               {
+                 $("#timeWarn").empty();
+                 $("#timeWarn").text("超出菜单时间范围,请重新选择时间！");
+                  $("#timeWarn").show();
+               }*/
+           }
+    });
+
+});
+});
+function getClass()
+{
+   
+    var school_id = $("#schools").val();
+    
+    $.ajax({
+                type: "post",
+                url: "{:U('Home/WxAccess/getClassBySchoolId')}",
+                data: {
+                    school_id: school_id,
+                },
+                success: function (res) {
+                    $("#banji").empty();
+                    
+                    var length=res.list.length;
+                    if(length>0)
+                    {
+                        $("#banji").append( "<option value=''>-不选择班级-</option>");
+                        for(var i=0;i<length;i++)
+                        {
+                            $("#banji").append( "<option value="+res.list[i].id+">"+res.list[i].bjmc+"</option>");
+                        }
+
+                    }else
+                    {
+                         $("#banji").append( "<option value=''>-请选择-</option>");
+                    
+                    }
+                    
+                   
+                  }               
+                
+            });
+}
+ 
+
+
+</script>

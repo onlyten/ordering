@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta content="telephone=no" name="format-detection">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>我的钱包</title>
+	<style type="text/css">
+		.button{ width:80%;background:#fff;border-width: 0px;padding:20px;font-size:20px;}
+	</style>
+	<link rel="stylesheet" href="__CSS__/common.css" type="text/css" charset="utf-8" />
+<body style="background:#eae9e8">
+<header id="header">
+    <div class="nvbt" onclick="javascript :history.back(-1);"><img src="__PICURL__/back.png" style="margin-top:12px" /></div>
+    <div class="nvtt">我的钱包</div>
+    <!-- <div onclick="location.href='{:U('packet_xi')}'">明细</div> -->
+</header>
+
+<div style="text-align:center;line-height:200px;background:#fff">
+	<b style="font-size:30px">可用余额:￥{$money_s}元
+	    <div style="margin-top:-130px;">待划款额:￥{$money_d}元</div>
+	</b>
+
+	<!-- <b style="font-size:30px">可用余额:￥{$money_s}元</b><br/>
+	<b style="font-size:30px">待划款额:￥{$money_d}元</b> -->
+</div>
+<!-- <div>
+	<center><br/><br/><br/><br/><br/>
+		<button class="button" onclick="callpay()">充值</button>
+	</center>
+</div> -->
+<script type="text/javascript">
+function callpay(){
+    alert("(ㄒoㄒ)程序猿回花果山了(ㄒoㄒ)");
+}
+</script>
+</body></html>

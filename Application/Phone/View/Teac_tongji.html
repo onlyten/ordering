@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+    <head>
+        <title>统计</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta content="telephone=no" name="format-detection">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="viewport" content="width=320, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    </head>
+    <body> 
+    	<foreach name="shopone" item="vo" key="k">
+			<if condition="$k eq 0">{$vo.shop_name}<br/></if>
+			{$vo["name"]}***<if condition="$vo.num eq ''">0</if>{$vo["num"]}<br/>
+		</foreach>
+		<if condition="$shopone neq ''">合计：{$one}<br/><br/></if>
+
+		<foreach name="shoptwo" item="vo" key="k">
+			<if condition="$k eq 0">{$vo.shop_name}<br/></if>
+			{$vo["name"]}***<if condition="$vo.num eq ''">0</if>{$vo["num"]}<br/>
+		</foreach>
+		<if condition="$shoptwo neq ''">合计：{$two}<br/><br/></if>
+		
+
+		<foreach name="shopthree" item="vo" key="k">
+			<if condition="$k eq 0">{$vo.shop_name}<br/></if>
+			{$vo["name"]}***<if condition="$vo.num eq ''">0</if>{$vo["num"]}<br/>
+		</foreach>
+		<if condition="$shopthree neq ''">合计：{$three}<br/><br/></if>
+		总计：{$allnum}
+	</body>
+</html>

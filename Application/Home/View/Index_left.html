@@ -1,0 +1,338 @@
+
+<if condition="$type eq 2">
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-dashboard"></i> <span>店铺首页</span> <i
+                class="fa fa-angle-right pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{:U('Home/Index/index')}"><i class="fa "></i>店铺首页</a></li>
+          
+            <!--  yxl <li><a href="{:U('Home/Index/productChart')}"><i class="fa "></i>商品分析</a></li> -->
+        </ul>
+    </li>
+	<!--20160822 yxl
+    <li class="treeview">
+
+        <a href="#">
+            <i class="fa fa-gears"></i> <span>系统设置</span> <i
+                class="fa fa-angle-right pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{:U('Home/Shop/modifyShop')}"><i class="fa "></i>商城设置</a></li>
+            <li><a href="{:U('Home/Config/address')}"><i class="fa "></i>地址设置</a></li>
+            <li><a href="{:U('Home/Config/wxPrintSet')}"><i class="fa "></i>微信打印机设置</a></li>
+        </ul>
+    </li>
+	-->
+      
+      
+
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-shopping-cart"></i> <span>商城管理</span> <i
+                class="fa fa-angle-right pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <!--<li><a href="{:U('Home/Shop/shop')}"><i class="fa "></i>店铺管理</a></li>-->
+           <li><a href="{:U('Home/Shop/modifyShop')}"><i class="fa "></i>商城设置</a></li>
+            <li><a href="{:U('Home/Shop/menu')}"><i class="fa "></i>菜单管理</a></li>
+			<!--  yxl
+			<li><a href="{:U('Home/Shop/ads')}"><i class="fa "></i>广告管理</a></li>
+            <li><a href="{:U('Home/Shop/label')}"><i class="fa "></i>标签管理</a></li>
+			-->
+            <li><a href="{:U('Home/Shop/product')}"><i class="fa "></i>商品管理</a></li>
+            <li><a href="{:U('Home/Shop/comment')}"><i class="fa "></i>评论管理</a></li>   
+        </ul>
+    </li>
+    <!-- yxl
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-edit"></i> <span>文章管理</span> <i
+                class="fa fa-angle-right pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{:U('Home/Artical/artical')}"><i class="fa "></i>文章管理</a></li>
+        </ul>
+    </li>
+    -->
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-bar-chart"></i> <span>订单管理</span> <i
+                class="fa fa-angle-right pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <!--<li><a href="{:U('Home/Order/order',array('day'=>date('Y-m-d')))}"><i class="fa "></i>当天订单</a></li>-->
+            <li><a href="{:U('Home/Order/order')}"><i class="fa "></i>全部订单</a></li>
+            <!--<li><a href="{:U('Home/Order/order',array('pay_status'=>0))}"><i class="fa "></i>未付款</a></li>
+            <li><a href="{:U('Home/Order/order',array('pay_status'=>1))}"><i class="fa "></i>已付款</a></li>
+            <li><a href="{:U('Home/Order/order',array('status'=>0))}"><i class="fa "></i>未处理</a></li>
+            <li><a href="{:U('Home/Order/order',array('status'=>1))}"><i class="fa "></i>已发货</a></li>
+            <li><a href="{:U('Home/Order/order',array('status'=>-4))}"><i class="fa "></i>申请退货</a></li>
+            <li><a href="{:U('Home/Order/order',array('status'=>-2))}"><i class="fa "></i>退货中</a></li>
+            <li><a href="{:U('Home/Order/order',array('status'=>-3))}"><i class="fa "></i>退货完成</a></li>
+            <li><a href="{:U('Home/Order/order',array('status'=>2))}"><i class="fa "></i>交易完成</a></li>
+            <li><a href="{:U('Home/Order/order',array('status'=>-1))}"><i class="fa "></i>交易取消</a></li>-->
+            <li><a href="{:U('Home/Order/detail',array('leave_status'=>-1))}"><i class="fa "></i>申请请假</a></li>
+            <li><a href="{:U('Home/Order/detail',array('retreat_status'=>-1))}"><i class="fa "></i>申请退餐</a></li>
+            <li><a href="{:U('Home/Order/rmeals')}"><i class="fa "></i>批量退餐</a></li>
+        </ul>
+    </li>
+
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-credit-card"></i> <span>财务管理</span> <i
+                class="fa fa-angle-right pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+		<!--  yxl
+            <li><a href="{:U('Home/Trade/trade')}"><i class="fa "></i>财务管理</a></li>
+            <li><a href="{:U('Home/Trade/tx')}"><i class="fa "></i>提现管理</a></li>
+			-->
+			<li><a href="{:U('Home/Trade/statements')}"><i class="fa "></i>交易流水</a></li>
+        </ul>
+    </li> 
+  <!--  yxl
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-group"></i> <span>用户管理</span> <i
+                class="fa fa-angle-right pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{:U('Home/User/user')}"><i class="fa "></i>用户管理</a></li>
+            <li><a href="{:U('Home/User/employee')}"><i class="fa "></i>员工管理</a></li>
+        </ul>
+    </li>
+	
+	-->
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-sitemap"></i> <span>统计管理</span> <i
+                class="fa fa-angle-right pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{:U('Home/Stastics/statistics')}"><i class="fa "></i>订餐统计</a></li>
+            <li><a href="{:U('Home/Stastics/collect')}"><i class="fa "></i>统计日汇总</a></li>
+        </ul>
+    </li>
+     <li class="treeview">
+            <a href="#">
+                <i class="fa fa-shopping-cart"></i> <span>消息管理</span> <i
+                    class="fa fa-angle-right pull-right"></i>
+            </a>
+             <ul class="treeview-menu">
+                <li><a href="{:U('Home/WxAccess/template')}"><i class="fa "></i>消息发送</a></li> 
+             </ul>
+        </li>
+
+
+<else/>
+
+    <volist name="rules" id="rule">
+        <if condition="$key eq 2">
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-dashboard"></i> <span>店铺首页</span> <i
+                        class="fa fa-angle-right pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <volist name="rule" id="ru">
+                        <if condition="$ru.name eq 'Home/Index/index'">
+                            <li><a href="{:U('Home/Index/index')}"><i class="fa "></i>店铺首页</a></li>
+                        </if>
+						<!-- yxl
+                        <if condition="$ru.name eq 'Home/Index/productChart'">
+                            <li><a href="{:U('Home/Index/productChart')}"><i class="fa "></i>商品分析</a></li>
+                        </if>
+						
+						-->
+                    </volist>
+                </ul>
+            </li>
+        </if>
+
+        <if condition="$key eq 3">
+		<!-- yxl
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-gears"></i> <span>系统设置</span> <i
+                        class="fa fa-angle-right pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <volist name="rule" id="ru">
+                        <if condition="$ru.name eq 'Home/Shop/modifyShop'">
+                            <li><a href="{:U('Home/Shop/modifyShop')}"><i class="fa "></i>商城设置</a></li>
+                        </if>
+                        <if condition="$ru.name eq 'Home/Config/address'">
+                            <li><a href="{:U('Home/Config/address')}"><i class="fa "></i>地址设置</a></li>
+                        </if>
+                        <if condition="$ru.name eq 'Home/Config/wxPrintSet'">
+                            <li><a href="{:U('Home/Config/wxPrintSet')}"><i class="fa "></i>微信打印机设置</a></li>
+                        </if>
+                    </volist>
+
+                </ul>
+            </li>
+		-->
+        </if>
+         
+        <if condition="$key eq 4">
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-shopping-cart"></i> <span>商城管理</span> <i
+                        class="fa fa-angle-right pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <volist name="rule" id="ru">
+                        <if condition="$ru.name eq 'Home/Shop/modifyShop'">
+                            <li><a href="{:U('Home/Shop/modifyShop')}"><i class="fa "></i>商城设置</a></li>
+                        </if>
+                        <if condition="$ru.name eq 'Home/Shop/menu'">
+                            <li><a href="{:U('Home/Shop/menu')}"><i class="fa "></i>菜单管理</a></li>
+                        </if>
+						<!-- yxl
+						<if condition="$ru.name eq 'Home/Shop/ads'">
+                            <li><a href="{:U('Home/Shop/shop')}"><i class="fa "></i>店铺管理</a></li>
+                            <li><a href="{:U('Home/Shop/ads')}"><i class="fa "></i>广告管理</a></li>
+                        </if>
+                        <if condition="$ru.name eq 'Home/Shop/label'">
+                            <li><a href="{:U('Home/Shop/label')}"><i class="fa "></i>标签管理</a></li>
+                        </if>
+						-->
+                        <if condition="$ru.name eq 'Home/Shop/product'">
+                            <li><a href="{:U('Home/Shop/product')}"><i class="fa "></i>商品管理</a></li>
+                        </if>
+                        <if condition="$ru.name eq 'Home/Shop/comment'">
+                            <li><a href="{:U('Home/Shop/comment')}"><i class="fa "></i>评论管理</a></li>
+                        </if>
+                    </volist>
+                </ul>
+            </li>
+        </if>
+
+        <if condition="$key eq 5">
+		<!-- yxl
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-edit"></i> <span>文章管理</span> <i
+                        class="fa fa-angle-right pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <volist name="rule" id="ru">
+                        <if condition="$ru.name eq 'Home/Artical/artical'">
+                            <li><a href="{:U('Home/Artical/artical')}"><i class="fa "></i>文章管理</a></li>
+                        </if>
+                    </volist>
+                </ul>
+            </li>
+			-->
+        </if>
+
+        <if condition="$key eq 6">
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-bar-chart"></i> <span>订单管理</span> <i
+                        class="fa fa-angle-right pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <volist name="rule" id="ru">
+                        <if condition="$ru.name eq 'Home/Order/order'">
+                            <!--<li><a href="{:U('Home/Order/order',array('day'=>date('Y-m-d')))}"><i class="fa "></i>当天订单</a></li>-->
+                            <li><a href="{:U('Home/Order/order')}"><i class="fa "></i>全部订单</a></li>
+                            <!--<li><a href="{:U('Home/Order/order',array('pay_status'=>0))}"><i class="fa "></i>未付款</a></li>
+                            <li><a href="{:U('Home/Order/order',array('pay_status'=>1))}"><i class="fa "></i>已付款</a></li>
+                            <li><a href="{:U('Home/Order/order',array('status'=>0))}"><i class="fa "></i>未处理</a></li>
+                            <li><a href="{:U('Home/Order/order',array('status'=>1))}"><i class="fa "></i>已发货</a></li>
+                            <li><a href="{:U('Home/Order/order',array('status'=>-4))}"><i class="fa "></i>申请退货</a></li>
+                            <li><a href="{:U('Home/Order/order',array('status'=>-2))}"><i class="fa "></i>退货中</a></li>
+                            <li><a href="{:U('Home/Order/order',array('status'=>-3))}"><i class="fa "></i>退货完成</a></li>
+                            <li><a href="{:U('Home/Order/order',array('status'=>2))}"><i class="fa "></i>交易完成</a></li>
+                            <li><a href="{:U('Home/Order/order',array('status'=>-1))}"><i class="fa "></i>交易取消</a></li>-->
+                            <li><a href="{:U('Home/Order/detail',array('leave_status'=>-1))}"><i class="fa "></i>申请请假</a></li>
+            				<li><a href="{:U('Home/Order/detail',array('retreat_status'=>-1))}"><i class="fa "></i>申请退餐</a></li>
+                            <li><a href="{:U('Home/Order/rmeals')}"><i class="fa "></i>批量退餐</a></li>
+                        </if>
+                    </volist>
+                </ul>
+            </li>
+        </if>
+
+        <if condition="$key eq 7">
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-credit-card"></i> <span>财务管理</span> <i
+                        class="fa fa-angle-right pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <volist name="rule" id="ru">
+					<!--yxl
+                        <if condition="$ru.name eq 'Home/Trade/trade'">
+                            <li><a href="{:U('Home/Trade/trade')}"><i class="fa "></i>财务管理</a></li>
+                        </if>
+                        <if condition="$ru.name eq 'Home/Trade/tx'">
+                            <li><a href="{:U('Home/Trade/tx')}"><i class="fa "></i>提现管理</a></li>
+                        </if>
+						-->
+						<if condition="$ru.name eq 'Home/Trade/statements'">
+						<li><a href="{:U('Home/Trade/statements')}"><i class="fa "></i>交易流水</a></li>
+						</if>
+                    </volist>
+                </ul>
+            </li>
+        </if>
+		
+        <if condition="$key eq 8">
+		<!--  yxl
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-group"></i> <span>用户管理</span> <i
+                        class="fa fa-angle-right pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <volist name="rule" id="ru">
+                        <if condition="$ru.name eq 'Home/User/user'">
+                            <li><a href="{:U('Home/User/user')}"><i class="fa "></i>用户管理</a></li>
+                        </if>
+                        <if condition="$ru.name eq 'Home/User/employee'">
+                            <li><a href="{:U('Home/User/employee')}"><i class="fa "></i>员工管理</a></li>
+                        </if>
+                    </volist>
+
+                </ul>
+            </li>
+			-->
+        </if>
+        <if condition="$key eq 9">
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-sitemap"></i> <span>统计管理</span> <i
+                        class="fa fa-angle-right pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <volist name="rule" id="ru">
+                        <if condition="$ru.name eq 'Home/Stastics/statistics'">
+                            <li><a href="{:U('Home/Stastics/statistics')}"><i class="fa "></i>订餐统计</a></li>
+                        </if>
+                        <if condition="$ru.name eq 'Home/Stastics/collect'">
+                        	<li><a href="{:U('Home/Stastics/collect')}"><i class="fa "></i>统计日汇总</a></li>
+                        </if>
+                    </volist>
+
+                </ul>
+            </li>
+        </if>
+    </volist>
+</if>
+
+<if condition="$type neq 3 && $type eq 2">
+    <li class="treeview">
+        <a href="#">
+            <i class="fa fa-gear"></i> <span>商家帐号管理</span><i class="fa fa-angle-right pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="{:U('Home/Account/userGroup')}"><i class="fa "></i>用户组管理</a></li>
+            <li><a href="{:U('Home/Account/admin')}"><i class="fa "></i>管理员管理</a></li>
+        </ul>
+    </li>
+</if>
+

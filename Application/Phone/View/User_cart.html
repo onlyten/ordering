@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html>
+
+    <head>
+       <meta charset="utf-8" />
+        <meta  http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-Language" content="en" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+        <meta name="misapplication-tap-highlight" content="no" />
+        <meta name="HandheldFriendly" content="true" />
+        <meta name="MobileOptimized" content="320" />
+        <title>购物车</title>
+        <link rel="stylesheet" href="__CSS__/common.css" type="text/css" charset="utf-8" />
+        <link href="__CSS__/bootstrap-combined.min.css" rel="stylesheet">
+        <script type="text/javascript" src="__JS__/jquery-1.7.2.js"></script>
+        <script type="text/javascript" src="__JS__/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="__CSS__/shopping-cart.css">
+        <link href="__CSS__/reset.css" rel="stylesheet" type="text/css">
+    </head>
+
+    <body>
+    <form name="form" action="{:U('cart_pay')}" method="post" >
+        <header id="header">
+            <div class="nvbt" onclick="javascript :history.back(-1);"><img src="__PICURL__/back.png"/></div>
+            <div class="nvtt">购物车</div>
+            <!-- <div class="nvbt iphone"><img src="__PICURL__/phone.png"/></div> -->
+        </header>
+        <div id="pageContent" class="pageContent sdcontent orderDetil">
+                <ul>
+                <div class="grayDivBackGround">
+                    <!--这是页面显示效果，内部无值-->
+                </div>
+                <li>
+
+                    <div class="liOrderTop detilTop">
+                        <div class="liLeft detilLiLeft" style="width:90%">{$user_message["xsxm"]}&nbsp;&nbsp;&nbsp;
+                        {$user_message["xxmc"]}{$user_message["bjmc"]}</div>
+                        <!-- <div class="liRight detilLiRight"><img src="__PICURL__/next.png"/></div> -->
+                    </div>
+                    <div class="liOrderFoot detilFoot">
+                        <ul>
+                        <foreach name="product" item="vo" key="k">
+                            <li>
+                                <div class="detilLeft">
+                                    {$vo.order_date}
+                                </div>
+                                <div class="detilMiddle">
+                                    {$vo.name}
+                                </div><!-- 
+                                <div class="detilRight">
+                                    ￥{$vo.price}
+                                </div> -->
+                            </li>
+                        </foreach>
+                            <li>
+                                <ul class="orderUl">
+                                    <li>
+                                        送餐日期：{$range}
+                                    </li>
+                                    <li>
+                                        店铺：{$shop_name}
+                                    </li>
+                                    <li>
+                                        套餐：{$package_name}
+                                    </li>
+                                    <li>
+                                        <input type="text" name="mark" id="mark" value="" placeholder="填写备注" style="font-size:1em;width:95%;padding-left: 0px;padding-bottom: 15px;padding-right: 0px;padding-top: 0px;padding-top: 15px;"><br/><br/><br/><br/><br/><br/><br/><br/>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                </li>
+            </ul>
+            
+        </div>
+
+
+        <div style="position:absolute;bottom:0px;width:100%" id="thisIsfoot">
+            <section>
+                <div class="shopping-cart" id="ds_gal">
+                    <div class="top clearfix">
+                        <div class="pro-num">
+                            <p>总计{$days}天 ￥{$total}</p>
+                        </div>
+                        <a class="continue" href="#">实付￥{$total}</a>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <div class="shopping-cart" id="ds_gal">
+                    <div class="account">
+                        <div class="total" style="margin-bottom: 0px;">
+                            <div class="final">
+                                <p>待支付：<strong id="cart_amount_desc">￥{$total}元</strong><button type="submit" style="background-color: red; float: right; padding: 15px; border-width: 0px; margin-right: -8px;">提交订单</button></p>
+                                <input type="hidden" name="menu_id" id="menu_id" value="{$menu_id}">
+                                <input type="hidden" name="total" id="total" value="{$total}">
+                                <input type="hidden" name="shop_id" id="shop_id" value="{$shop_id}">
+                                <input type="hidden" name="shop_name" id="shop_name" value="{$shop_name}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        </form>
+        <script type="text/javascript">
+            window.onload=function(){
+                $("input").focus(function(){$("#thisIsfoot").hide();});
+                $("input").blur(function(){$("#thisIsfoot").show();});
+            }
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE HTML>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+        <meta  http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="Content-Language" content="en" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+        <meta name="misapplication-tap-highlight" content="no" />
+        <meta name="HandheldFriendly" content="true" />
+        <meta name="MobileOptimized" content="320" />
+    <title>我的订单</title>
+    <link rel="stylesheet" href="__CSS__/common.css" type="text/css" charset="utf-8" />
+    <link href="__CSS__/bootstrap-combined.min.css" rel="stylesheet">
+    <script type="text/javascript" src="__JS__/jquery-1.7.2.js"></script>
+    <script type="text/javascript" src="__JS__/bootstrap.min.js"></script>
+  </head>
+
+  <body>
+    <header id="header">
+      <div class="nvbt" onclick="javascript :history.back(-1);"><img src="__PICURL__/back.png"/></div>
+      <div class="nvtt">我的订单</div>
+    </header>
+    <div id="pageContent" class="pageContent sdcontent" style="position:relative;overflow-x: hidden;margin-top: 0px">
+      <div class="container-fluid">
+        <div class="row-fluid">
+          <div class="span12">
+            <div class="tabbable" id="tabs-156692">
+              <ul class="nav nav-tabs myOrderTabs" style="margin-top:42px">
+                <li class="active">
+                  <a href="#panel-all" data-toggle="tab">全部</a>
+                </li>
+                <li>
+                  <a href="#panel-dai" data-toggle="tab">待支付</a>
+                </li>
+                <li>
+                  <a href="#panel-ing" data-toggle="tab">进行中</a>
+                </li>
+                <li>
+                  <a href="#panel-already" data-toggle="tab">已完成</a>
+                </li>
+              </ul>
+              
+              <div class="tab-content myOrderTabContent" style="margin-top:42px">
+                <div class="myOderPane tab-pane active" id="panel-all">
+                  <ul>
+                    <div class="grayDivBackGround">
+                <!--这是页面显示效果，内部无值-->
+                      </div>
+                   <foreach name="order_w" item="vo">
+                    <li class="orderRemain">
+                      
+                        
+                      <div class="liOrderTop">
+                        <div class="liLeft" onclick="">{$vo.name} <img src="__PICURL__/next.png"/> </div>
+                        <div class="liRight">订单待支付</div>
+                      </div>
+                      <div class="liOrderFoot">
+                        <img width="75px" src="__PUBLIC__/Uploads/{$vo.savepath}{$vo.savename}"/>
+                        <div id="orderInfoMation">
+                        <a href="{:U('User/order_detail',array('order_id'=>$vo['id'],'shop_id'=>$vo['shop_id']))}" style='text-decoration:none;'>
+                          <p class="price">￥{$vo.totalprice}</p>
+                          <p class="orderTime">下单时间：{$vo.time}</p>
+                          <p class="orderTime">送餐日期：{$vo.range}</p>
+                        </a>  
+                        </div>
+                        <div class="caozButtons">
+                          <a href="{:U('User/cart_pay_again',array('order_id'=>$vo["orderid"]))}">
+                            <input class="buttons" type="button" id="" value="立即支付" />
+                          </a>
+                        </div>
+                      </div>
+                      
+                    </li>
+                  </foreach>
+
+                  <foreach name="order_j" item="vo">
+                    <li class="orderRemain">
+                      
+                        
+                      <div class="liOrderTop">
+                        <div class="liLeft" onclick="">{$vo.name} <img src="__PICURL__/next.png"/> </div>
+                        <div class="liRight">订单进行中</div>
+                      </div>
+                      <div class="liOrderFoot">
+                        <img width="75px" src="__PUBLIC__/Uploads/{$vo.savepath}{$vo.savename}"/>
+                        <div id="orderInfoMation">
+                        <a href="{:U('User/order_detail',array('order_id'=>$vo['id'],'shop_id'=>$vo['shop_id']))}" style='text-decoration:none;'>
+                          <p class="price">￥{$vo.totalprice}</p>
+                          <p class="orderTime">下单时间：{$vo.time}</p>
+                          <p class="orderTime">送餐日期：{$vo.range}</p>
+                        </a>  
+                        </div>
+                        <div class="caozButtons">
+                        <if condition="$vo['is_retreat'] eq 1">
+                          <a href="{:U('order_cancel',array('order_id'=>$vo['id'],'menu_id'=>$vo['menu_id']))}" onClick="return confirm('确定退餐?');">
+                            <input class="buttons" type="button" id="" value="退餐" />
+                          </a>
+                        </if>
+                        <if condition="$vo['is_leave'] eq 1">
+                          <a href="{:U('leave',array('order_id'=>$vo['id'],'menu_id'=>$vo['menu_id']))}">
+                            <input class="buttons" type="button" id="" value="请假" />
+                          </a>
+                        </if>
+                        </div>
+                      </div>
+                      
+                    </li>
+                  </foreach>
+
+                  <foreach name="order_y" item="vo">
+                    <li class="">
+                      
+                        
+                      <div class="liOrderTop">
+                        <div class="liLeft" onclick="">{$vo.name} <img src="__PICURL__/next.png"/> </div>
+                        <div class="liRight">订单完成</div>
+                      </div>
+                      <div class="liOrderFoot">
+                        <img width="75px" src="__PUBLIC__/Uploads/{$vo.savepath}{$vo.savename}"/>
+                        <div id="orderInfoMation">
+                        <a href="{:U('User/order_detail',array('order_id'=>$vo['id'],'shop_id'=>$vo['shop_id']))}" style='text-decoration:none;'>
+                          <p class="price">￥{$vo.totalprice}</p>
+                          <p class="orderTime">下单时间：{$vo.time}</p>
+                          <p class="orderTime">送餐日期：{$vo.range}</p>
+                        </a>  
+                        </div>
+                        
+                      </div>
+                      
+                    </li>
+                  </foreach> 
+
+
+                    
+                  </ul>
+                </div>
+                
+                <div class="myOderPane tab-pane " id="panel-dai">
+                  <ul>
+                    <div class="grayDivBackGround">
+                <!--这是页面显示效果，内部无值-->
+                      </div>
+
+                  <foreach name="order_w" item="vo">
+                    <li class="orderRemain">
+                      
+                      
+                      <div class="liOrderTop">
+                        <div class="liLeft" onclick="">{$vo.name} <img src="__PICURL__/next.png"/> </div>
+                        <div class="liRight">订单待支付</div>
+                      </div>
+                      <div class="liOrderFoot">
+                        <img width="75px" src="__PUBLIC__/Uploads/{$vo.savepath}{$vo.savename}"/>
+                        <div id="orderInfoMation">
+                        <a href="{:U('User/order_detail',array('order_id'=>$vo['id'],'shop_id'=>$vo['shop_id']))}" style='text-decoration:none;'>
+                          <p class="price">￥{$vo.totalprice}</p>
+                          <p class="orderTime">下单时间：{$vo.time}</p>
+                          <p class="orderTime">送餐日期：{$vo.range}</p>
+                        </a>  
+                        </div>
+                        <div class="caozButtons">
+                          <a href="{:U('User/cart_pay_again',array('order_id'=>$vo["orderid"]))}">
+                            <input class="buttons" type="button" id="" value="立即支付" />
+                          </a>
+                        </div>
+                      </div>
+                      
+                    </li>
+                  </foreach>
+                  </ul>
+                </div>
+                <div class="myOderPane tab-pane" id="panel-ing">
+                  <ul>
+                    <div class="grayDivBackGround">
+                <!--这是页面显示效果，内部无值-->
+                      </div>
+
+                  <foreach name="order_j" item="vo">
+                    <li class="orderRemain">
+                      
+                        
+                      <div class="liOrderTop">
+                        <div class="liLeft" onclick="">{$vo.name} <img src="__PICURL__/next.png"/> </div>
+                        <div class="liRight">订单进行中</div>
+                      </div>
+                      <div class="liOrderFoot">
+                        <img width="75px" src="__PUBLIC__/Uploads/{$vo.savepath}{$vo.savename}"/>
+                        <div id="orderInfoMation">
+                        <a href="{:U('User/order_detail',array('order_id'=>$vo['id'],'shop_id'=>$vo['shop_id']))}" style='text-decoration:none;'>
+                          <p class="price">￥{$vo.totalprice}</p>
+                          <p class="orderTime">下单时间：{$vo.time}</p>
+                          <p class="orderTime">送餐日期：{$vo.range}</p>
+                        </a>  
+                        </div>
+                        <div class="caozButtons">
+                        <if condition="$vo['is_retreat'] eq 1">
+                          <a href="{:U('order_cancel',array('order_id'=>$vo['id'],'menu_id'=>$vo['menu_id']))}" onClick="return confirm('确定退餐?');">
+                            <input class="buttons" type="button" id="" value="退餐" />
+                          </a>
+                        </if>
+                        <if condition="$vo['is_leave'] eq 1">
+                          <a href="{:U('leave',array('order_id'=>$vo['id'],'menu_id'=>$vo['menu_id']))}">
+                            <input class="buttons" type="button" id="" value="请假" />
+                          </a>
+                        </if>
+                        </div>
+                      </div>
+                      
+                    </li>
+                  </foreach>
+                  </ul>
+                </div>
+                <div class="myOderPane tab-pane" id="panel-already">
+                  <ul>
+                    <div class="grayDivBackGround">
+                <!--这是页面显示效果，内部无值-->
+                      </div>
+
+                  <foreach name="order_y" item="vo">
+                    <li class="">
+                      
+                        
+                      <div class="liOrderTop">
+                        <div class="liLeft" onclick="">{$vo.name} <img src="__PICURL__/next.png"/> </div>
+                        <div class="liRight">订单完成</div>
+                      </div>
+                      <div class="liOrderFoot">
+                        <img width="75px" src="__PUBLIC__/Uploads/{$vo.savepath}{$vo.savename}"/>
+                        <div id="orderInfoMation">
+                        <a href="{:U('User/order_detail',array('order_id'=>$vo['id'],'shop_id'=>$vo['shop_id']))}" style='text-decoration:none;'>
+                          <p class="price">￥{$vo.totalprice}</p>
+                          <p class="orderTime">下单时间：{$vo.time}</p>
+                          <p class="orderTime">送餐日期：{$vo.range}</p>
+                        </a>  
+                        </div>
+                        
+                      </div>
+                      
+                    </li>
+                  </foreach> 
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+
+
+</html>

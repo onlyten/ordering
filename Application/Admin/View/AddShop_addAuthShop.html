@@ -1,0 +1,93 @@
+<section class="content-header">
+    <h1>
+        学校设置
+        <small></small>
+    </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title">绑定商家</h3>
+                </div>
+                <!-- form start -->
+                <form class="form-horizontal" action="{:U('Admin/AddShop/addAuthShop')}" method="post">
+                    <div class="box-body">
+                        <input class="form-control" name="id" placeholder="" value="0"
+                               type="hidden">
+					    <input class="form-control" name="company_id" placeholder="" value="{$xjschool.id}"
+                               type="hidden">
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">名称</label>
+
+                            <div class="col-sm-10">
+                                <input class="form-control"  placeholder="" value="{$xjschool.xxmc}" readonly="readonly"
+                                       type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">绑定权限</label>
+
+                            <div class="col-sm-10">
+
+                                  <div class="table-responsive" style="overflow-x: visible;">
+                                    <table class="table table-bordered table-hover">
+                                        <tbody>
+                                        <tr>
+                                            <th style="width: 30px">
+                                                
+                                            </th>
+                                            <th>商家名称</th>
+                                            </tr>
+										
+                                        <volist name="shopList" id="shop">
+                                            <tr>
+                                                <td>
+                                                    <label><input type="checkbox" name="shop_id[]" class="check" value="{$shop.id}"
+                                                       
+														<volist name="schoolShop" id="vo">
+                                                          <if condition="$vo['shop_id'] eq $shop['id']">checked="checked"</if>
+                                                        </volist>/>
+													
+													</label>
+								
+                                                </td>
+                                                <td>
+                                                    {$shop.name}
+                                                </td>
+                                             </tr>
+                                        </volist>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-body -->
+
+                        <div class="box-footer">
+                            <div class="col-sm-2">
+                                <button type="submit" class="btn btn-block btn-danger">保存</button>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <button type="button" class="btn btn-block btn-default" onclick="history.go(-1)">取消
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- /.box -->
+        </div>
+        <!--/.col (right) -->
+    </div>
+</section>
+<script type="text/javascript">
+    if ('{$authGroup}') {
+        $('input[name="id"]').val('{$authGroup.id}');
+    }
+</script>

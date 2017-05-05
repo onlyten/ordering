@@ -1,0 +1,217 @@
+<style type="text/css">
+    .error{
+        color:red;
+    }
+</style>
+
+<section class="content-header">
+    <h1>
+        商城管理
+        <small></small>
+    </h1>
+</section>
+<script>
+$().ready(function() {
+// 在键盘按下并释放及提交后验证提交表单
+	$("#menuForm").validate({
+        rules: {
+          name: {
+			required: true,
+            maxlength: 8
+          },
+          price: {
+			 required: true,
+			 number: true
+		  },
+		  start_time: {
+		     required: true,
+             minlength: 1
+		  }
+		},
+        messages: {
+          name: {
+            required: "请输入菜单名",
+            maxlength: "名称最多8个字"
+          },
+          price: {
+            required: "请输入价格",
+			number: "请输入合法数字"
+          },
+		   start_time: {
+             required:  "请选择时间",
+             minlength: "请选择时间"
+          }   
+        }
+	});
+});
+
+</script>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title">新增菜单</h3>
+                </div>
+                <!-- form start -->
+                <form class="form-horizontal" action="{:U('Home/Shop/addMenu')}" method="post" id="menuForm">
+                    <div class="box-body">
+                        <input class="form-control" name="id" placeholder="" value="0"
+                               type="hidden">
+
+                        <div class="form-group" style="display: none">
+                            <label class="col-sm-2 control-label">上级菜单</label>
+
+                            <div class="col-sm-10">
+                                <select name="pid" id="menu_id" class="form-control">
+                                    <option value="0">一级菜单</option>
+                                    <volist name="menuList" id="menuList">
+                                        <option value="{$menuList.id}">{$menuList.name}</option>
+                                    </volist>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">菜单名称</label>
+
+                            <div class="col-sm-10">
+                                <input class="form-control" name="name" placeholder="" value="{$menu.name}"
+                                       type="text">
+                            </div>
+                        </div>
+						 <div class="form-group">
+                            <label class="col-sm-2 control-label">菜单价格</label>
+
+                            <div class="col-sm-10">
+                                <input class="form-control" name="price" placeholder="" value="{$menu.price}"
+                                       type="text">
+                            </div>
+                        </div>
+
+						 <div class="form-group">
+                         <label class="col-sm-2 control-label">配送时间</label>
+                             <div class="col-sm-10">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                    <input type="text" class="form-control" name="start_time"  id="reservationtime" value="{$menu.start_time}">
+								 <span style="color:red; float:left; padding-left:15px; line-height:35px;" id="timeWarn"></span>
+							   </div>
+                            </div>
+                          </div>   
+<!--                        <div class="form-group">
+                            <label class="col-sm-2 control-label">图片</label>
+
+                            <div class="col-sm-10">
+                                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                    <div class="fileupload-new img-thumbnail">
+                                        <empty name="menu.file_id"><img
+                                                src="__PUBLIC__/Admin/dist/img/noimage.gif">
+                                            <else/>
+                                            <img src="__PUBLIC__/Uploads/{$menu.savepath}{$menu.savename}">
+                                        </empty>-->
+                                        <input class="form-control" name="file_id" id="file_id" placeholder=""
+                                               value="0"
+                                               type="hidden">
+
+                                        <!--  <div class="edit_pic_mask">
+                                            <i class="fa fa-plus-circle" onclick="imageUploader(this,false)"></i>
+                                            <i class="fa fa-minus-circle" onclick="removeImage(this,false)"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+                      <!--  <div class="form-group">
+                            <label class="col-sm-2 control-label">排序</label>
+
+                            <div class="col-sm-10">
+                                <input class="form-control" name="rank" placeholder="" value="{$menu.rank}"
+                                       type="text">
+                            </div>
+                        </div>-->
+                       <!-- <div class="form-group">
+                            <label class="col-sm-2 control-label">备注</label>
+
+                            <div class="col-sm-10">
+                                <input class="form-control" name="remark" placeholder="" value="{$menu.remark}"
+                                       type="text">
+                            </div>
+                        </div>
+                    </div>-->
+                    <!-- /.box-body -->
+
+                    <div class="box-footer">
+                        <div class="col-sm-2">
+                            <button type="submit" class="btn btn-block btn-danger">保存</button>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-block btn-default" onclick="history.go(-1)">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- /.box -->
+        </div>
+        <!--/.col (right) -->
+    </div>
+</section>
+<script type="text/javascript">
+    if ('{$menu}') {
+        $('input[name="id"]').val('{$menu.id}');
+        $('select[name="pid"]').val('{$menu.pid}');
+    }
+
+	 $('#reservationtime').daterangepicker({
+            timePicker: false,
+            timePickerIncrement: 30,
+            format: 'YYYY-MM-DD',
+            separator: ' --- ',
+            todayHighlight:true,
+            minDate: new Date(),			
+        }); 
+
+
+//	function checkStartTime() {
+//	   	var timeRange = $('#reservationtime').val();
+//		var menu_id = $('#menu_id').val();
+//
+//		alert(timeRange);
+//        $.ajax({
+//            type: "post",
+//            url: "{:U('Home/shop/getCheckTime')}",
+//            data: {
+//            	timeRange: timeRange,
+//				menu_id:menu_id,
+//            },
+//            success: function (res) {
+//               
+//                if(res.count>0)
+//                {
+//                	//alert("您选择的日期内已经有此菜单,请重新选择时间！");
+//					 $("#timeWarn").empty();
+//					 $("#timeWarn").text("您选择的日期内已经有此菜单,请重新选择时间！");
+//					 $("#timeWarn").show();
+//                	//$("#timeFlag").val(res.count);
+//                	//flag =  false;
+//                }else
+//				{
+//				     $("#timeWarn").empty();
+//				     $("#timeWarn").hide();
+//				}
+//				/*else
+//                {
+//                	//$("#timeFlag").val(res.count);                	
+//                	//$("#saveInfo").attr("disabled", false);
+//                }
+//				*/
+//                
+//            }
+//        });
+//       // return flag;
+//    }
+</script>

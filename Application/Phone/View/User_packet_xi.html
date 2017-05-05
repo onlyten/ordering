@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+		<meta name="misapplication-tap-highlight" content="no" />
+		<meta name="HandheldFriendly" content="true" />
+		<meta name="MobileOptimized" content="320" />
+		<title>交易明细</title>
+		<link rel="stylesheet" href="__CSS__/common.css" type="text/css" charset="utf-8" />
+		<link href="__CSS__/bootstrap-combined.min.css" rel="stylesheet">
+		<script type="text/javascript" src="__JS__/jquery-1.7.2.js"></script>
+		<script type="text/javascript" src="__JS__/bootstrap.min.js"></script>
+		<script src="__JS__/api.js" type="text/javascript" charset="utf-8"></script>
+		<script src="__JS__/icheck.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="__CSS__/red.css"/>
+		
+		<style type="text/css">
+		a{
+        text-decoration:none;
+        }
+		</style>
+	
+	</head>
+
+	<body>
+		<header id="header">
+			<div class="nvbt" onclick="javascript :history.back(-1);"><img src="__PICURL__/back.png"/></div>
+			<div class="nvtt">交易明细</div>
+		</header>
+		<div id="pageContent" style="min-height:0;overflow-x:hidden;background: #F2F2F2;margin-left: -0px;" class="pageContent sdcontent letMeFree">
+			
+			<ul class="qingjia" style="border-top: 5px #DADADA solid">
+			<volist name='mingxi' id='vo'>
+				<li style="width: 100%;height: 80px;border-bottom:8px #F2F2F2 solid ;">
+					<div style="height: auto;padding: 0;margin:0;width: 92%;height: 100%;margin: 0 auto;">
+						<div class="shTopLi" style="border-bottom: 1px #DADADA solid;width: 100%;height:30%;">
+							<a style="float: left;">订餐-{$vo.menu_name}</a>
+							<a style="float: right;">
+								￥{$vo.price}元
+							</a>
+						</div>
+						<div class="shBottomLi" style="width: 100%;height:70%;">
+							<span id="">
+								<p>
+									支付完成
+									<br><a style="color: #999999;font-size: 12px;">{$vo.time}</a>
+								</p>
+							</span>
+						</div>
+					</div>
+				</li>
+			</volist>
+			</ul>
+		</div>
+		<!-- <div class="footer" id="footer">
+			<ul id="menus" class="shFooter">
+				<li class="active" style="width: 50%;" onclick="switchIndex(this)">审核</li>
+				<li style="width: 50%;" onclick="switchIndex(this)"><a href="{:U('tongjii')}" style="color:#6c6c6c">订餐统计</a></li>
+			</ul>
+		</div> -->
+		<script>
+		$(document).ready(function(){
+		  
+		});
+		function switchIndex(tag) {
+			if(tag == $api.dom('#footer li.active')) return;
+			var eFootLis = $api.domAll('#footer li'),
+				index = 0;
+			for(var i = 0, len = eFootLis.length; i < len; i++) {
+				if(tag == eFootLis[i]) {
+					index = i;
+				} else {
+					$api.removeCls(eFootLis[i], 'active');
+				}
+			}
+			$api.addCls(eFootLis[index], 'active');
+
+		}
+		</script>
+	</body>
+
+
+</html>

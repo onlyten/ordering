@@ -1,0 +1,167 @@
+<style type="text/css">
+    #bg{ display: none; position: absolute; top: 0%; left: 0%; width: 100%; height: 100%; background-color: black; z-index:1001; -moz-opacity: 0.7; opacity:.70; filter: alpha(opacity=70);}
+    #show{display: none; position: absolute; top: 25%; left: 45%; padding: 8px; border: 8px solid #E8E9F7; background-color: white; z-index:1002; overflow: auto;}
+</style>
+<div id="bg" style="display:none;"></div>
+<div id="show" style="display:none;">
+    <img src="__PUBLIC__/Admin/dist/img/loading.gif"><div align="center">正在加载...</div>
+</div>
+
+<section class="content-header">
+    <h1>
+        订单管理
+        <small></small>
+    </h1>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title">退餐</h3>
+                </div>
+                <!-- form start -->
+                <form action="" class="form-horizontal" id="oar">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">班级</label>
+                            <div class="col-sm-10">
+                                <select name="school" onclick="schoolChange()" id="school" class="form-control" style="width:200px;display:inline">
+                                    <option value="">选择 学校</option>
+                                    <volist name="schools" id="sch">
+                                        <option value="{$sch.company_id}">{$sch.xxmc}</option>
+                                    </volist>
+                                </select>
+                                <select name="class" class="form-control" id="class" style="width:200px;display:inline">
+                                    <option value="">选择 班级</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">退餐方式</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <input type="radio" name="mode" id="allr" value="2"><span>退全部</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <input type="radio" name="mode" id="onnr" value="1">退某一天
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="dateone">
+                            <label class="col-sm-2 control-label"></label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                    <input type="text" class="form-control" name="time" id="reservationtime" value="" style="width:50%">
+                                </div>
+                            </div>
+                        </div>    
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer">
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-block btn-danger" onclick="rmealAll();">确定</button>
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="button" class="btn btn-block btn-default" onclick="history.go(-1)">取消</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- /.box -->
+        </div>
+        <!--/.col (right) -->
+    </div>
+</section>
+<script type="text/javascript">
+    $(function () {
+        //日历
+        $('#reservationtime').daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 30,
+            format: 'YYYY-MM-DD',
+            separator: ' --- ',
+            todayHighlight:true,
+            minDate: new Date(),
+            singleDatePicker: true, 
+            //maxDate: endDate,
+            // startDate:startDate,
+            //endDate:endDate,
+        });
+
+        $('#dateone').hide();
+
+        $('#allr').click(function(){
+            $('#dateone').hide();
+            $('#reservationtime').val('');
+        }); 
+
+        $('#onnr').click(function(){
+            $('#dateone').show();
+        });
+
+        //所有选项必须都选择
+        
+        //查询已存在
+
+    });
+
+    function schoolChange(){
+        var schoolid = $('#school').val();
+        var text = '';
+        if(schoolid != ''){
+            $('#class').empty();
+            $.post("{:U(\'Home/Order/getclass\')}",{schoolid},function(data){
+                obj= $.parseJSON(data);
+                //多维数组循环
+                $.each(obj,function(index,content){
+                    //表格内容
+                    text += "<option value='" + content['id'] + "'>" + content['bjmc'] + "</option>";
+                });
+                $("#class").append(text);
+            }); 
+        }else{
+            $('#class').empty();
+            $("#class").append("<option value=''>选择 班级</option>");
+        }   
+    }
+
+    function rmealAll(){
+        $.ajax({
+            type:"POST",
+            url:"{:U(\'Home/Order/allrmeals\')}",
+            data:$('#oar').serialize(),
+            beforeSend:function(){
+                //这里是开始执行方法，显示效果
+                document.getElementById("bg").style.display ="block";
+                document.getElementById("show").style.display ="block";
+            },
+            success:function(data){
+                //数据加载成功
+                document.getElementById("bg").style.display ="none";
+                document.getElementById("show").style.display ="none";
+                if(data == '1'){
+                    location.href = "{:U(\'Home/Order/rmeals\')}"
+                }else{
+                    alert('操作失败！');
+                }
+            }
+        });
+    }
+   
+        
+       
+</script>
