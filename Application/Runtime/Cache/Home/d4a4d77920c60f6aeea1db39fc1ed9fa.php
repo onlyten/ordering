@@ -7,21 +7,21 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="/share/ordering/Public/Admin/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/ordering/ordering/Public/Admin/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="/share/ordering/Public/Admin/dist/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/ordering/ordering/Public/Admin/dist/css/font-awesome.min.css">
     <!-- Ionicons -->
-    <link rel="stylesheet" href="/share/ordering/Public/Admin/dist/css/ionicons.min.css">
+    <link rel="stylesheet" href="/ordering/ordering/Public/Admin/dist/css/ionicons.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="/share/ordering/Public/Admin/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="/ordering/ordering/Public/Admin/dist/css/AdminLTE.min.css">
     <!-- iCheck -->
-    <link rel="stylesheet" href="/share/ordering/Public/Admin/plugins/iCheck/square/blue.css">
+    <link rel="stylesheet" href="/ordering/ordering/Public/Admin/plugins/iCheck/square/blue.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="/share/ordering/Public/Admin/dist/js/html5shiv.min.js"></script>
-    <script src="/share/ordering/Public/Admin/dist/js/1.4.2/respond.min.js"></script>
+    <script src="/ordering/ordering/Public/Admin/dist/js/html5shiv.min.js"></script>
+    <script src="/ordering/ordering/Public/Admin/dist/js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
 <body class="hold-transition login-page" style="background-image:url('<?php echo ($wallpaper); ?>');background-size: cover;">
@@ -30,7 +30,7 @@
     <!-- /.login-logo -->
     <div class="login-box-body" style="margin-top:-65px">
         <div class="login-logo" style="margin: 30px 10px">
-            <img src="/share/ordering/Public/Admin/dist/img/logo.png" >
+            <img src="/ordering/ordering/Public/Admin/dist/img/logo.png" >
         </div>
 
         <form action="<?php echo U('Home/Public/login');?>" method="post">
@@ -87,11 +87,11 @@
 -->
 
 <!-- jQuery 2.1.4 -->
-<script src="/share/ordering/Public/Admin/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="/ordering/ordering/Public/Admin/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <!-- Bootstrap 3.3.5 -->
-<script src="/share/ordering/Public/Admin/bootstrap/js/bootstrap.min.js"></script>
+<script src="/ordering/ordering/Public/Admin/bootstrap/js/bootstrap.min.js"></script>
 <!-- iCheck -->
-<script src="/share/ordering/Public/Admin/plugins/iCheck/icheck.min.js"></script>
+<script src="/ordering/ordering/Public/Admin/plugins/iCheck/icheck.min.js"></script>
 <script>
     $(function () {
         $('input').iCheck({

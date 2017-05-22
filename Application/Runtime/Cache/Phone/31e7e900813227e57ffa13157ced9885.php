@@ -8,8 +8,8 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-touch-fullscreen" content="yes">
         <meta http-equiv="Access-Control-Allow-Origin" content="*">
-        <link href="/share/ordering/Public/Phone/css/login/login.css" type="text/css" rel="stylesheet">
-        <link href="/share/ordering/Public/Phone/css/login/global.css" type="text/css" rel="stylesheet">
+        <link href="/ordering/ordering/Public/Phone/css/login/login.css" type="text/css" rel="stylesheet">
+        <link href="/ordering/ordering/Public/Phone/css/login/global.css" type="text/css" rel="stylesheet">
     </head>
     <body>
         <div class="login">
@@ -19,8 +19,8 @@
             <form method="post" action="<?php echo U('login_update');?>" onsubmit="return checkform()">
             <div class="login-bar">
                 <ul style="margin-left: 30px;">
-                    <li><img src="/ordering/Public/Phone/css/login/images/login_user.png"><input style="font-size:16px;" type="text" class="text" id="username" name="username" placeholder="请输入用户名" value="179201615004"/></li>
-                    <li><img src="/ordering/Public/Phone/css/login/images/login_pwd.png"><input style="font-size:16px;" type="password" class="psd" id="password" name="password" placeholder="请输入确认密码" value="000000"/></li>
+                    <li><img src="/ordering/Public/Phone/css/login/images/login_user.png"><input style="font-size:16px;" type="text" class="text" id="username" name="username" placeholder="请输入用户名" value=""/></li>
+                    <li><img src="/ordering/Public/Phone/css/login/images/login_pwd.png"><input style="font-size:16px;" type="password" class="psd" id="password" name="password" placeholder="请输入确认密码" value=""/></li>
                 </ul>
             </div>
            <!-- <center> <input style="margin-top:13%" type="checkbox" name="wechat" id="wechat" checked="checked" value="wx" /> <font color="white">绑定微信</font></center> -->
